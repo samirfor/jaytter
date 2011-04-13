@@ -1,25 +1,38 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
 /*
  * LoginWindow.java
  *
- * Created on 07/04/2011, 09:56:11
+ * Created on 07/04/2011, 21:34:52
  */
-
 package ui.core;
+
+import ui.core.containers.AccountsList;
 
 /**
  *
- * @author samir
+ * @author joaoneto
  */
 public class LoginWindow extends javax.swing.JFrame {
 
     /** Creates new form LoginWindow */
     public LoginWindow() {
         initComponents();
+        this.add(new AccountsList(), java.awt.BorderLayout.CENTER);
     }
 
     /** This method is called from within the constructor to
@@ -31,158 +44,60 @@ public class LoginWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedMain = new javax.swing.JTabbedPane();
-        jTabbedPaneHome = new javax.swing.JTabbedPane();
-        jTabbedPaneHomeAll = new javax.swing.JTabbedPane();
-        jTabbedPaneHomePublic = new javax.swing.JTabbedPane();
-        jTabbedPaneHomeConversation = new javax.swing.JTabbedPane();
-        jTabbedPaneMentions = new javax.swing.JTabbedPane();
-        jTabbedPaneMentionsAll = new javax.swing.JTabbedPane();
-        jTabbedPaneMentionsReply = new javax.swing.JTabbedPane();
-        jTabbedPaneDMs = new javax.swing.JTabbedPane();
-        jTabbedPaneDMInbox = new javax.swing.JTabbedPane();
-        jTabbedPaneDMOutbox = new javax.swing.JTabbedPane();
-        jTabbedPaneRTs = new javax.swing.JTabbedPane();
-        jTabbedPaneRTRetwweted = new javax.swing.JTabbedPane();
-        jTabbedPaneRTbyMe = new javax.swing.JTabbedPane();
-        jTabbedPaneRTbyOthers = new javax.swing.JTabbedPane();
-        jTabbedPaneSearch = new javax.swing.JTabbedPane();
-        jTabbedPaneFindProfile = new javax.swing.JTabbedPane();
-        jTabbedPaneFindProfile1 = new javax.swing.JTabbedPane();
-        jPanelMenuTopo = new javax.swing.JPanel();
-        jPanelAvatar = new javax.swing.JPanel();
-        jPanelNewTweet = new javax.swing.JPanel();
+        mainPanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
-        jTabbedMain.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+        mainPanel.setBackground(java.awt.Color.pink);
+        mainPanel.setLayout(new java.awt.BorderLayout());
 
-        jTabbedPaneHome.addTab("All", jTabbedPaneHomeAll);
-        jTabbedPaneHome.addTab("Public", jTabbedPaneHomePublic);
-        jTabbedPaneHome.addTab("Conversation", jTabbedPaneHomeConversation);
+        jPanel3.setBackground(new java.awt.Color(237, 167, 56));
+        jPanel3.setMinimumSize(new java.awt.Dimension(137, 77));
+        jPanel3.setPreferredSize(new java.awt.Dimension(297, 110));
+        jPanel3.setLayout(new java.awt.GridBagLayout());
 
-        jTabbedMain.addTab("Home", jTabbedPaneHome);
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jaytter/images/intents-assets/intents-assets/bird/bird_gray/bird_32_gray.png"))); // NOI18N
+        jButton1.setText("Add Account");
+        jPanel3.add(jButton1, new java.awt.GridBagConstraints());
 
-        jTabbedPaneMentions.addTab("All", jTabbedPaneMentionsAll);
-        jTabbedPaneMentions.addTab("Reply Only", jTabbedPaneMentionsReply);
+        mainPanel.add(jPanel3, java.awt.BorderLayout.PAGE_START);
 
-        jTabbedMain.addTab("Mentions", jTabbedPaneMentions);
+        getContentPane().add(mainPanel);
 
-        jTabbedPaneDMs.addTab("Inbox", jTabbedPaneDMInbox);
-        jTabbedPaneDMs.addTab("Outbox", jTabbedPaneDMOutbox);
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
 
-        jTabbedMain.addTab("Direct Messages", jTabbedPaneDMs);
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
-        jTabbedPaneRTs.addTab("Retweeted", jTabbedPaneRTRetwweted);
-        jTabbedPaneRTs.addTab("By Me", jTabbedPaneRTbyMe);
-        jTabbedPaneRTs.addTab("By Others", jTabbedPaneRTbyOthers);
-
-        jTabbedMain.addTab("RTs", jTabbedPaneRTs);
-
-        jTabbedPaneSearch.addTab("Profile", jTabbedPaneFindProfile);
-        jTabbedPaneSearch.addTab("Keyword", jTabbedPaneFindProfile1);
-
-        jTabbedMain.addTab("Search", jTabbedPaneSearch);
-
-        javax.swing.GroupLayout jPanelAvatarLayout = new javax.swing.GroupLayout(jPanelAvatar);
-        jPanelAvatar.setLayout(jPanelAvatarLayout);
-        jPanelAvatarLayout.setHorizontalGroup(
-            jPanelAvatarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 75, Short.MAX_VALUE)
-        );
-        jPanelAvatarLayout.setVerticalGroup(
-            jPanelAvatarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 69, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanelNewTweetLayout = new javax.swing.GroupLayout(jPanelNewTweet);
-        jPanelNewTweet.setLayout(jPanelNewTweetLayout);
-        jPanelNewTweetLayout.setHorizontalGroup(
-            jPanelNewTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 286, Short.MAX_VALUE)
-        );
-        jPanelNewTweetLayout.setVerticalGroup(
-            jPanelNewTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanelMenuTopoLayout = new javax.swing.GroupLayout(jPanelMenuTopo);
-        jPanelMenuTopo.setLayout(jPanelMenuTopoLayout);
-        jPanelMenuTopoLayout.setHorizontalGroup(
-            jPanelMenuTopoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelMenuTopoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanelNewTweet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelMenuTopoLayout.setVerticalGroup(
-            jPanelMenuTopoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelMenuTopoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelMenuTopoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelNewTweet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelMenuTopo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedMain, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelMenuTopo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedMain, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new LoginWindow().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanelAvatar;
-    private javax.swing.JPanel jPanelMenuTopo;
-    private javax.swing.JPanel jPanelNewTweet;
-    private javax.swing.JTabbedPane jTabbedMain;
-    private javax.swing.JTabbedPane jTabbedPaneDMInbox;
-    private javax.swing.JTabbedPane jTabbedPaneDMOutbox;
-    private javax.swing.JTabbedPane jTabbedPaneDMs;
-    private javax.swing.JTabbedPane jTabbedPaneFindProfile;
-    private javax.swing.JTabbedPane jTabbedPaneFindProfile1;
-    private javax.swing.JTabbedPane jTabbedPaneHome;
-    private javax.swing.JTabbedPane jTabbedPaneHomeAll;
-    private javax.swing.JTabbedPane jTabbedPaneHomeConversation;
-    private javax.swing.JTabbedPane jTabbedPaneHomePublic;
-    private javax.swing.JTabbedPane jTabbedPaneMentions;
-    private javax.swing.JTabbedPane jTabbedPaneMentionsAll;
-    private javax.swing.JTabbedPane jTabbedPaneMentionsReply;
-    private javax.swing.JTabbedPane jTabbedPaneRTRetwweted;
-    private javax.swing.JTabbedPane jTabbedPaneRTbyMe;
-    private javax.swing.JTabbedPane jTabbedPaneRTbyOthers;
-    private javax.swing.JTabbedPane jTabbedPaneRTs;
-    private javax.swing.JTabbedPane jTabbedPaneSearch;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
-
 }

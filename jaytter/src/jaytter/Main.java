@@ -1,7 +1,7 @@
 package jaytter;
 
-import ui.core.LoginWindow;
 import ui.core.MainWindow;
+import ui.core.LoginWindow;
 
 /**
  *
@@ -15,6 +15,6 @@ public class Main {
      */
     public static void main(String[] args)
     {
-        MainWindow mainWindow = new MainWindow();
+        LoginWindow mainWindow = new LoginWindow();
     }
 }

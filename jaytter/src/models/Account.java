@@ -15,8 +15,7 @@
  */
 package models;
 
-import java.util.Collection;
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Project: JayTTer: A CrossPlatform Twitter Client
@@ -26,46 +25,55 @@ import java.util.Date;
  * @author João Neto
  * @version 5
  *   
- * @see The GNU Public License (GPL)
+ * @see The GNU Public License (GPL) v3
  */
-public class Account
-{
-    public Account( String name, String oauthKey, Date dateAdded) {
+public class Account {
+
+    /** local private name for the account (is the twitter username )*/
+    private String name;
+    /** local private key for oauth */
+    private String oauthKey;
+    /** informative date to store the date for signed */
+    private GregorianCalendar dateAdded;
+    /** amount of login made ​​by user */
+    private int loginTimes;
+
+    public Account(String name, String oauthKey, GregorianCalendar dateAdded, int loginTimes) {
         this.name = name;
         this.oauthKey = oauthKey;
         this.dateAdded = dateAdded;
+        this.loginTimes = loginTimes;
     }
-    
+
+    public GregorianCalendar getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(GregorianCalendar dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
+    public int getLogin_times() {
+        return loginTimes;
+    }
+
+    public void setLogin_times(int loginTimes) {
+        this.loginTimes = loginTimes;
+    }
+
     public String getName() {
         return name;
     }
 
-    public Account setName( String name ) {
+    public void setName(String name) {
         this.name = name;
-        return this;
-    }
-    public Date getDateAdded() {
-        return dateAdded;
-    }
-
-    public Account setDateAdded(Date dateAdded) {
-        this.dateAdded = dateAdded;
-        return this;
     }
 
     public String getOauthKey() {
         return oauthKey;
     }
 
-    public Account setOauthKey(String oauthKey) {
+    public void setOauthKey(String oauthKey) {
         this.oauthKey = oauthKey;
-        return this;
     }
-    
-    /** local private name for the account (is the twitter username )*/
-    private String name;
-    /** local private key for oauth */
-    private String oauthKey;
-    /** informative date to store the date for signed */
-    private Date dateAdded;
 }
