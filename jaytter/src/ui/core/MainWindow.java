@@ -67,6 +67,8 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelMenuTopo = new javax.swing.JPanel();
         jPanelAvatar = new javax.swing.JPanel();
         jPanelNewTweet = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,15 +112,19 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 69, Short.MAX_VALUE)
         );
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout jPanelNewTweetLayout = new javax.swing.GroupLayout(jPanelNewTweet);
         jPanelNewTweet.setLayout(jPanelNewTweetLayout);
         jPanelNewTweetLayout.setHorizontalGroup(
             jPanelNewTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 286, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
         );
         jPanelNewTweetLayout.setVerticalGroup(
             jPanelNewTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanelMenuTopoLayout = new javax.swing.GroupLayout(jPanelMenuTopo);
@@ -149,7 +155,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelMenuTopo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedMain, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE))
+                    .addComponent(jTabbedMain, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -180,6 +186,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelAvatar;
     private javax.swing.JPanel jPanelMenuTopo;
     private javax.swing.JPanel jPanelNewTweet;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedMain;
     private javax.swing.JTabbedPane jTabbedPaneDMInbox;
     private javax.swing.JTabbedPane jTabbedPaneDMOutbox;
@@ -198,6 +205,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPaneRTbyOthers;
     private javax.swing.JTabbedPane jTabbedPaneRTs;
     private javax.swing.JTabbedPane jTabbedPaneSearch;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
 }

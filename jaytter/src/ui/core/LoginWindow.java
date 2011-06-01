@@ -54,7 +54,7 @@ public class LoginWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
-        mainPanel.setBackground(java.awt.Color.pink);
+        mainPanel.setBackground(new java.awt.Color(153, 255, 51));
         mainPanel.setLayout(new java.awt.BorderLayout());
 
         jPanel3.setBackground(new java.awt.Color(237, 167, 56));
