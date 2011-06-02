@@ -1,6 +1,5 @@
 package jaytter;
 
-import ui.core.MainWindow;
 import ui.core.LoginWindow;
 
 /**
