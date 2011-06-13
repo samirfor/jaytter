@@ -32,7 +32,7 @@ public class LoginWindow extends javax.swing.JFrame {
     /** Creates new form LoginWindow */
     public LoginWindow() {
         initComponents();
-        this.add(new AccountsList(), java.awt.BorderLayout.CENTER);
+        this.painelContas.add(new AccountsList(), java.awt.BorderLayout.CENTER);
     }
 
     /** This method is called from within the constructor to
@@ -47,15 +47,17 @@ public class LoginWindow extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        painelContas = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(350, 670));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         mainPanel.setBackground(new java.awt.Color(153, 255, 51));
-        mainPanel.setLayout(new java.awt.BorderLayout());
 
         jPanel3.setBackground(new java.awt.Color(237, 167, 56));
         jPanel3.setMinimumSize(new java.awt.Dimension(137, 77));
@@ -66,11 +68,24 @@ public class LoginWindow extends javax.swing.JFrame {
         jButton1.setText("Add Account");
         jPanel3.add(jButton1, new java.awt.GridBagConstraints());
 
-        mainPanel.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+        mainPanel.add(jPanel3);
+
+        painelContas.setLayout(new java.awt.BorderLayout());
+        mainPanel.add(painelContas);
 
         getContentPane().add(mainPanel);
 
         jMenu1.setText("File");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Sair");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -81,10 +96,15 @@ public class LoginWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
+     * Não usado!
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main__(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
@@ -97,7 +117,9 @@ public class LoginWindow extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JPanel painelContas;
     // End of variables declaration//GEN-END:variables
 }

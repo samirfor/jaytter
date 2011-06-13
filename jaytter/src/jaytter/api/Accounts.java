@@ -17,7 +17,7 @@
 package jaytter.api;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import models.Account;
 
 /**
@@ -31,11 +31,15 @@ import models.Account;
  */
 public class Accounts {
 
+    /**
+     * Return all accounts API key stored on local machine
+     * @return ArrayList<Account>
+     */
     public ArrayList<Account> getStoredAccounts() {
         ArrayList<Account> v = new ArrayList();
-        v.add(new Account("joao_neto", "asd3dmw309mw039dmqw30dwm3d", new GregorianCalendar(), 0));
-        v.add(new Account("samirfor", "asd3dmw309mw039dmqw30dwm3d", new GregorianCalendar(), 0));
-        v.add(new Account("emanuellagomes", "asd3dmw309mw039dmqw30dwm3d", new GregorianCalendar(), 0));
+        v.add(new Account("joao_neto", "asd3dmw309mw039dmqw30dwm3d", new Date(), 0));
+        v.add(new Account("samirfor", "asd3dmw309mw039dmqw30dwm3d", new Date(), 0));
+        v.add(new Account("emanuellagomes", "asd3dmw309mw039dmqw30dwm3d", new Date(), 0));
         return v;
     }
 }

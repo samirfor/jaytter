@@ -15,7 +15,7 @@
  */
 package models;
 
-import java.util.GregorianCalendar;
+import java.util.Date;
 
 /**
  * Project: JayTTer: A CrossPlatform Twitter Client
@@ -34,22 +34,22 @@ public class Account {
     /** local private key for oauth */
     private String oauthKey;
     /** informative date to store the date for signed */
-    private GregorianCalendar dateAdded;
+    private Date dateAdded;
     /** amount of login made ​​by user */
     private int loginTimes;
 
-    public Account(String name, String oauthKey, GregorianCalendar dateAdded, int loginTimes) {
+    public Account(String name, String oauthKey, Date dateAdded, int loginTimes) {
         this.name = name;
         this.oauthKey = oauthKey;
         this.dateAdded = dateAdded;
         this.loginTimes = loginTimes;
     }
 
-    public GregorianCalendar getDateAdded() {
+    public Date getDateAdded() {
         return dateAdded;
     }
 
-    public void setDateAdded(GregorianCalendar dateAdded) {
+    public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 

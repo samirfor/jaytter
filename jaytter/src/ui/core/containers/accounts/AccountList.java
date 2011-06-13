@@ -17,8 +17,10 @@ package ui.core.containers.accounts;
 public class AccountList extends javax.swing.JPanel {
 
     /** Creates new form AccountList */
-    public AccountList() {
+    public AccountList( String accountName, String accountAPIKey ) {
         initComponents();
+        this.accountName.setText( accountName );
+        this.accountAPIKey = accountAPIKey;
     }
     /** This method is called from within the constructor to
      * initialize the form.
@@ -37,7 +39,6 @@ public class AccountList extends javax.swing.JPanel {
         add(jLabel1);
 
         accountName.setFont(accountName.getFont().deriveFont(accountName.getFont().getStyle() | java.awt.Font.BOLD));
-        accountName.setText("@joao_neto");
         add(accountName);
 
         buttonLogin.setText("Login");
@@ -50,9 +51,10 @@ public class AccountList extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        // TODO add your handling code here:
+        System.out.println( "Tentando logar na api: " + this.accountAPIKey );
     }//GEN-LAST:event_buttonLoginActionPerformed
 
+    private String accountAPIKey;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel accountName;
     public javax.swing.JButton buttonLogin;
