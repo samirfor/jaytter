@@ -20,7 +20,6 @@
  *
  * Created on 13/06/2011, 10:48:24
  */
-
 package ui.core;
 
 import ui.core.containers.AccountsList;
@@ -134,22 +133,21 @@ public class InitWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void botaoAdicionarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAdicionarContaActionPerformed
-
-        NewAccountDialog d = new NewAccountDialog(this, true );
-        d.setVisible( true );
+        NewAccountDialog d = new NewAccountDialog(this, true);
+        d.setVisible(true);
     }//GEN-LAST:event_botaoAdicionarContaActionPerformed
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new InitWindow().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JButton botaoAdicionarConta;
@@ -165,7 +163,6 @@ public class InitWindow extends javax.swing.JFrame {
 
     private void setupComponents() {
         AccountsList listaDeContas = new AccountsList();
-        this.painelContas.add( listaDeContas );
+        this.painelContas.add(listaDeContas);
     }
-
 }

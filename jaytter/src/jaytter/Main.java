@@ -1,6 +1,7 @@
 package jaytter;
 
-import ui.core.LoginWindow;
+import ui.core.InitWindow;
+//import ui.core.MainWindow;
 
 /**
  *
@@ -12,9 +13,8 @@ public class Main {
      * Test-drive
      * @param args the command line arguments
      */
-    public static void main(String[] args)
-    {
-        LoginWindow mainWindow = new LoginWindow();
-        mainWindow.setVisible( true );
+    public static void main(String[] args) {
+//        MainWindow.main(args);
+        InitWindow.main(args);
     }
 }

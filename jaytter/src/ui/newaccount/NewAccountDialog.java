@@ -20,16 +20,18 @@
  *
  * Created on 13/06/2011, 12:04:34
  */
-
 package ui.newaccount;
 
-import java.awt.Desktop;
-import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import models.Account;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
+import util.OpenDefaultBrowser;
 
 /**
  *
@@ -55,8 +57,7 @@ public class NewAccountDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        authButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -74,13 +75,10 @@ public class NewAccountDialog extends javax.swing.JDialog {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
 
-        jLabel1.setText("Autenticar no Twitter");
-
-        jLabel2.setText("<html><a href=\"\">Clique aqui para fazer login no twitter</a></html>");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+        authButton.setText("Autenticar no Twitter");
+        authButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                authButtonActionPerformed(evt);
             }
         });
 
@@ -89,22 +87,16 @@ public class NewAccountDialog extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(134, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(133, 133, 133))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(authButton)
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addComponent(authButton)
+                .addContainerGap(165, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -115,30 +107,61 @@ public class NewAccountDialog extends javax.swing.JDialog {
         setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        try {
-            JOptionPane.showMessageDialog( this, "Abra o navegador, faça login no seu twitter e copie o código que foi gerado! ", "Conta do Twitter", JOptionPane.INFORMATION_MESSAGE );
-            Desktop.getDesktop().browse(URI.create("http://www.twitter.com/"));
-
-            String code = JOptionPane.showInputDialog( "Cole aqui o código gerado!" );
-        } catch (Exception ex) {
-            Logger.getLogger(NewAccountDialog.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_jLabel2MouseClicked
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void authButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_authButtonActionPerformed
+        AccessToken accessToken = null;
+        Twitter twitter = new TwitterFactory().getInstance();
+        twitter.setOAuthConsumer("wHaPcyNhf4a7JBOf8I1ig", "YUtDUWZcEBsTUCzS5ZZygERcGwyflJ5iTvsSjU7Iv6g");
+        RequestToken requestToken;
+        try {
+            requestToken = twitter.getOAuthRequestToken();
+            while (null == accessToken) {
+                System.out.println("Open the following URL and grant access to your account:");
+                OpenDefaultBrowser browser = new OpenDefaultBrowser(requestToken.getAuthorizationURL());
+                System.out.println(browser.getUrl());
+                browser.open();
+                JOptionPane.showConfirmDialog(this, "Clicking OK, your default browser will open to confirm access to Twitter. Please click Authorize.\n\n" + browser.getUrl(), "Auth", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                String pin = JOptionPane.showInputDialog("Paste the PIN code here:");
+                try {
+                    if (pin.length() > 0) {
+                        accessToken = twitter.getOAuthAccessToken(requestToken, pin);
+                    } else {
+                        accessToken = twitter.getOAuthAccessToken();
+                    }
+                } catch (TwitterException te) {
+                    if (401 == te.getStatusCode()) {
+                        System.out.println("Unable to get the access token.");
+                        JOptionPane.showMessageDialog(this, "Unable to get the access token.", "Erro API", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        continue;
+                    }
+                }
+            }
+
+            Account account = new Account(twitter.verifyCredentials(), accessToken);
+//            account.save(); // TODO Save the credential in the database
+            System.out.println("Acesso autorizado:");
+            System.out.println(account.getUser());
+
+        } catch (Exception ex) {
+            Logger.getLogger(NewAccountDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_authButtonActionPerformed
+
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 NewAccountDialog dialog = new NewAccountDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+
+                    @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
@@ -147,13 +170,10 @@ public class NewAccountDialog extends javax.swing.JDialog {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton authButton;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
-
 }

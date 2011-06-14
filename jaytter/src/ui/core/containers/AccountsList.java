@@ -1,14 +1,10 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * AccountsList.java
  *
  * Created on 07/04/2011, 22:06:31
  */
 package ui.core.containers;
+
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import jaytter.api.Accounts;
@@ -20,30 +16,29 @@ import ui.core.containers.accounts.AccountList;
  * @author joaoneto
  */
 public final class AccountsList extends javax.swing.JPanel {
+
     private ArrayList<Account> storedAccounts;
 
     /** Creates new form AccountsList */
     public AccountsList() {
         initComponents();
-        addAccountsToList(  );
-
+        addAccountsToList();
     }
 
-    public void addAccountsToList(  )
-    {
+    public void addAccountsToList() {
         Accounts accounts = new Accounts();
         storedAccounts = accounts.getStoredAccounts();
-        
-        for(int i = 0; i < storedAccounts.size(); i++ ){
-            this.addAccountToPanel( storedAccounts.get(i) );
+
+        for (int i = 0; i < storedAccounts.size(); i++) {
+            this.addAccountToPanel(storedAccounts.get(i));
         }
     }
-    
-    private void addAccountToPanel( Account a )
-    {
+
+    private void addAccountToPanel(Account a) {
         ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/jaytter/images/intents-assets/intents-assets/bird/bird_gray/bird_16_gray.png"));
-        this.accountsTag.addTab( "", icon, new AccountList( a.getName(), a.getOauthKey() ) );
+        this.accountsTag.addTab("", icon, new AccountList(a));
     }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

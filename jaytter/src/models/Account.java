@@ -16,6 +16,13 @@
 package models;
 
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.User;
+import twitter4j.auth.AccessToken;
 
 /**
  * Project: JayTTer: A CrossPlatform Twitter Client
@@ -29,20 +36,39 @@ import java.util.Date;
  */
 public class Account {
 
+    /** User details supplied by Twitter*/
+    private User user;
     /** local private name for the account (is the twitter username )*/
     private String name;
-    /** local private key for oauth */
-    private String oauthKey;
+    /** local private keys (token and secretToken) for OAuth */
+    private AccessToken accessToken;
     /** informative date to store the date for signed */
     private Date dateAdded;
     /** amount of login made ​​by user */
     private int loginTimes;
 
-    public Account(String name, String oauthKey, Date dateAdded, int loginTimes) {
+    public Account(User user, String name, AccessToken accessToken, Date dateAdded, int loginTimes) {
+        this.user = user;
         this.name = name;
-        this.oauthKey = oauthKey;
+        this.accessToken = accessToken;
         this.dateAdded = dateAdded;
         this.loginTimes = loginTimes;
+    }
+
+    public Account(User user, AccessToken accessToken) {
+        this.user = user;
+        this.name = user.getName();
+        this.accessToken = accessToken;
+    }
+
+    public Account(AccessToken accessToken) {
+        this.accessToken = accessToken;
+        fetchAttributesFromTwitter();
+    }
+
+    public Account(String name) {
+        this.name = name;
+        // TODO Search in database by name and fetch access token
     }
 
     public Date getDateAdded() {
@@ -53,27 +79,46 @@ public class Account {
         this.dateAdded = dateAdded;
     }
 
-    public int getLogin_times() {
-        return loginTimes;
-    }
-
-    public void setLogin_times(int loginTimes) {
-        this.loginTimes = loginTimes;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public AccessToken getAccessToken() {
+        return accessToken;
     }
 
-    public String getOauthKey() {
-        return oauthKey;
+    public int getLoginTimes() {
+        return loginTimes;
     }
 
-    public void setOauthKey(String oauthKey) {
-        this.oauthKey = oauthKey;
+    public void setLoginTimes(int loginTimes) {
+        this.loginTimes = loginTimes;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * Connect with Twitter and search the required information.
+     */
+    public final void fetchAttributesFromTwitter() {
+        Twitter twitter = new TwitterFactory().getInstance();
+        twitter.setOAuthConsumer("wHaPcyNhf4a7JBOf8I1ig", "YUtDUWZcEBsTUCzS5ZZygERcGwyflJ5iTvsSjU7Iv6g");
+        twitter.setOAuthAccessToken(accessToken);
+        try {
+            this.user = twitter.verifyCredentials();
+        } catch (TwitterException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.name = user.getName();
+    }
+
+    /**
+     * TODO DB must to save token and token secret.
+     */
+    private void storeAccessToken() {
+        //store accessToken.getToken()
+        //store accessToken.getTokenSecret()
     }
 }

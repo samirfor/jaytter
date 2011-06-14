@@ -1,14 +1,11 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * AccountList.java
  *
  * Created on 07/04/2011, 22:14:35
  */
 package ui.core.containers.accounts;
+
+import models.Account;
 
 /**
  *
@@ -17,11 +14,12 @@ package ui.core.containers.accounts;
 public class AccountList extends javax.swing.JPanel {
 
     /** Creates new form AccountList */
-    public AccountList( String accountName, String accountAPIKey ) {
+    public AccountList(Account account) {
         initComponents();
-        this.accountName.setText( accountName );
-        this.accountAPIKey = accountAPIKey;
+        this.account = account;
+        this.accountName.setText(account.getName());
     }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -51,10 +49,9 @@ public class AccountList extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        System.out.println( "Tentando logar na api: " + this.accountAPIKey );
+        System.out.println("Tentando logar na api: " + this.account.getAccessToken());
     }//GEN-LAST:event_buttonLoginActionPerformed
-
-    private String accountAPIKey;
+    private Account account;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel accountName;
     public javax.swing.JButton buttonLogin;

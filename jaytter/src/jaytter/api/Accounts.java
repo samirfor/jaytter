@@ -17,8 +17,8 @@
 package jaytter.api;
 
 import java.util.ArrayList;
-import java.util.Date;
 import models.Account;
+import twitter4j.auth.AccessToken;
 
 /**
  * Project: JayTTer: A CrossPlatform Twitter Client
@@ -32,14 +32,17 @@ import models.Account;
 public class Accounts {
 
     /**
-     * Return all accounts API key stored on local machine
+     * Return all accounts credentials stored on database
      * @return ArrayList<Account>
      */
     public ArrayList<Account> getStoredAccounts() {
+        // TODO Capturing this information from the database
+        
+        // This code below is only for tests
         ArrayList<Account> v = new ArrayList();
-        v.add(new Account("joao_neto", "asd3dmw309mw039dmqw30dwm3d", new Date(), 0));
-        v.add(new Account("samirfor", "asd3dmw309mw039dmqw30dwm3d", new Date(), 0));
-        v.add(new Account("emanuellagomes", "asd3dmw309mw039dmqw30dwm3d", new Date(), 0));
+        v.add(new Account("joao_neto"));
+        v.add(new Account(new AccessToken("370909999999999999999SXiYwdo", "5376Wi3D99999999999999991ShcjSrCbc"))); // samirfor
+        v.add(new Account("emanuellagomes"));
         return v;
     }
 }

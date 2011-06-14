@@ -21,6 +21,16 @@
  */
 package ui.core;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
+
 /**
  * Project: JayTTer: A CrossPlatform Twitter Client
  * File name: MainWindow.java
@@ -32,9 +42,20 @@ package ui.core;
  */
 public class MainWindow extends javax.swing.JFrame {
 
+    private Twitter twitter;
+    private AccessToken accessToken;
+
     /** Creates new form MainWindow */
     public MainWindow() {
         initComponents();
+        config();
+    }
+
+    public void config() {
+        twitter = new TwitterFactory().getInstance();
+        twitter.setOAuthConsumer("wHaPcyNhf4a7JBOf8I1ig", "YUtDUWZcEBsTUCzS5ZZygERcGwyflJ5iTvsSjU7Iv6g");
+        accessToken = new AccessToken("37090271-76kI0tpn8nDD68dJ5znixqgC7rslWF4OkwSXiYwdo", "5376Wi3DdwRYJTD78lXSnjRzXArmlhgrf1ShcjSrCbc");
+        twitter.setOAuthAccessToken(accessToken);
     }
 
     /** This method is called from within the constructor to
@@ -79,6 +100,11 @@ public class MainWindow extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(500, 600));
 
         refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
 
         jTabbedMain.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
@@ -377,17 +403,56 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        config();
+        List<Status> statuses = null;
+        try {
+            statuses = twitter.getFriendsTimeline();
+        } catch (TwitterException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Showing friends timeline.");
+        for (Status status : statuses) {
+            System.out.println(status.getUser().getName() + ":"
+                    + status.getUser().getProfileImageURL());
+            models.ui.Tweet tweet = new models.ui.Tweet(status);
+            JFrame frame = new JFrame("Title Bar Text");
+            frame.setSize(tweet.getSize());
+//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.getContentPane().add(tweet);
+            frame.pack();
+            frame.show();
+            frame.setVisible(true);
+            frame.add(tweet);
+//            this.remove(jPanelTweet1);
+//            this.add(tweet);
+//            jPanelHomeAll.setLayout(this.jPanelHomeAllLayout);
+//        jPanelHomeAllLayout.setHorizontalGroup(
+//            jPanelHomeAllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addComponent(jPanelTweet1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//        );
+//        jPanelHomeAllLayout.setVerticalGroup(
+//            jPanelHomeAllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGroup(jPanelHomeAllLayout.createSequentialGroup()
+//                .addComponent(jPanelTweet1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                .addContainerGap(159, Short.MAX_VALUE))
+//        );
+            break;
+        }
+
+    }//GEN-LAST:event_refreshButtonActionPerformed
+
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new MainWindow().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanelAvatar;
     private javax.swing.JPanel jPanelDMInbox;
@@ -418,5 +483,4 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaNewTweet;
     private javax.swing.JButton refreshButton;
     // End of variables declaration//GEN-END:variables
-
 }
