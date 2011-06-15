@@ -59,7 +59,7 @@ public class InitWindow extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("JayTTER");
+        setTitle("JayTTer");
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(320, 660));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
@@ -88,7 +88,7 @@ public class InitWindow extends javax.swing.JFrame {
         painelBaixo.setLayout(painelBaixoLayout);
         painelBaixoLayout.setHorizontalGroup(
             painelBaixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 252, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         painelBaixoLayout.setVerticalGroup(
             painelBaixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -143,7 +143,9 @@ public class NewAccountDialog extends javax.swing.JDialog {
 
             Account account = new Account(twitter.verifyCredentials(), accessToken);
             account.storeAccessToken();
-
+            // TODO Inserir dados na tela dos logins
+            this.dispose(); // fecha a janela corrente
+            
         } catch (Exception ex) {
             Logger.getLogger(NewAccountDialog.class.getName()).log(Level.SEVERE, null, ex);
         }

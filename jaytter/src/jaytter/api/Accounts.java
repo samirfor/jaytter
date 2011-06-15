@@ -13,7 +13,6 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-
 package jaytter.api;
 
 import java.util.ArrayList;
@@ -43,13 +42,13 @@ public class Accounts {
 
         ArrayList<Properties> accounts = cnf.getStoredAccounts();
 
-        if( accounts.isEmpty() ){
-            System.out.println( "No accounts" );
+        if (accounts.isEmpty()) {
+            System.out.println("No accounts");
             return v;
         }
 
-        for( int i = 0; i < accounts.size(); i++ ){
-            v.add(new Account(accounts.get(i).getProperty("screen-name"), new AccessToken(accounts.get(i).getProperty("token"), accounts.get(i).getProperty("token-secret"))));
+        for (int i = 0; i < accounts.size(); i++) {
+            v.add(new Account(new AccessToken(accounts.get(i).getProperty("token"), accounts.get(i).getProperty("token-secret"))));
         }
         return v;
     }

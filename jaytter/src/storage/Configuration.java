@@ -22,9 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,10 +35,11 @@ public class Configuration {
 
     private File configDir;
     private String pathSeparator;
+    public static final String ACCOUNT_FILE_PREFIX = "account-";
 
     public Configuration() {
         String userHome = System.getProperty("user.home");
-        pathSeparator   = System.getProperty( "file.separator" );
+        pathSeparator = System.getProperty("file.separator");
         if (userHome == null) {
             throw new IllegalStateException("user.home==null");
         }
@@ -59,7 +58,7 @@ public class Configuration {
         String[] list = configDir.list(new FilenameFilter() {
 
             public boolean accept(File dir, String name) {
-                return name.startsWith("account-");
+                return name.startsWith(ACCOUNT_FILE_PREFIX);
             }
         });
 
@@ -78,7 +77,7 @@ public class Configuration {
     public boolean storeAccount(String accountName, Properties values) {
         FileOutputStream os = null;
         try {
-            os = new FileOutputStream(configDir + pathSeparator + "account-" + accountName + ".xml");
+            os = new FileOutputStream(configDir + pathSeparator + ACCOUNT_FILE_PREFIX + accountName + ".xml");
             values.storeToXML(os, "", "UTF-8");
 
         } catch (FileNotFoundException ex) {
@@ -88,5 +87,15 @@ public class Configuration {
         }
 
         return true;
+    }
+
+    public Properties getAccount(String name) {
+        Properties p = new Properties();
+        try {
+            p.loadFromXML(new FileInputStream(configDir.getAbsolutePath() + pathSeparator + ACCOUNT_FILE_PREFIX + name));
+        } catch (IOException ex) {
+            Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return p;
     }
 }

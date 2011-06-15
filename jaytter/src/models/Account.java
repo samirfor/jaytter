@@ -15,7 +15,6 @@
  */
 package models;
 
-import java.io.File;
 import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -42,7 +41,7 @@ public class Account {
     /** User details supplied by Twitter*/
     private User user;
     /** local private name for the account (is the twitter username )*/
-    private String name;
+    private String screenName;
     /** local private keys (token and secretToken) for OAuth */
     private AccessToken accessToken;
     /** informative date to store the date for signed */
@@ -50,9 +49,9 @@ public class Account {
     /** amount of login made ​​by user */
     private int loginTimes;
 
-    public Account(User user, String name, AccessToken accessToken, Date dateAdded, int loginTimes) {
+    public Account(User user, String screenName, AccessToken accessToken, Date dateAdded, int loginTimes) {
         this.user = user;
-        this.name = name;
+        this.screenName = screenName;
         this.accessToken = accessToken;
         this.dateAdded = dateAdded;
         this.loginTimes = loginTimes;
@@ -60,12 +59,12 @@ public class Account {
 
     public Account(User user, AccessToken accessToken) {
         this.user = user;
-        this.name = user.getName();
+        this.screenName = user.getName();
         this.accessToken = accessToken;
     }
 
-    public Account(String name, AccessToken accessToken) {
-        this.name = name;
+    public Account(String screenName, AccessToken accessToken) {
+        this.screenName = screenName;
         this.accessToken = accessToken;
     }
 
@@ -75,8 +74,10 @@ public class Account {
     }
 
     public Account(String name) {
-        this.name = name;
-        // TODO Search in database by name and fetch access token
+        Configuration configuration = new Configuration();
+        Properties properties = configuration.getAccount(name);
+        this.screenName = properties.getProperty("screen-name");
+        this.accessToken = new AccessToken(properties.getProperty("token"), properties.getProperty("token-secret"));
     }
 
     public Date getDateAdded() {
@@ -88,7 +89,7 @@ public class Account {
     }
 
     public String getName() {
-        return name;
+        return screenName;
     }
 
     public AccessToken getAccessToken() {
@@ -119,19 +120,19 @@ public class Account {
         } catch (TwitterException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.name = user.getName();
+        this.screenName = user.getName();
     }
 
     public void storeAccessToken() {
         Configuration cnf = new Configuration();
         Properties values = new Properties();
 
-        values.setProperty( "token", getAccessToken().getToken() );
-        values.setProperty( "token-secret", getAccessToken().getTokenSecret() );
-        if( getDateAdded() != null )
-            values.setProperty( "date-added", getDateAdded().toString() );
-        values.setProperty( "screen-name", getUser().getScreenName() );
-        values.setProperty( "name", getUser().getName() );
-        cnf.storeAccount( getUser().getScreenName(), values );
+        values.setProperty("token", getAccessToken().getToken());
+        values.setProperty("token-secret", getAccessToken().getTokenSecret());
+        if (getDateAdded() != null) {
+            values.setProperty("date-added", getDateAdded().toString());
+        }
+        values.setProperty("screen-name", getUser().getScreenName());
+        cnf.storeAccount(getUser().getScreenName(), values);
     }
 }

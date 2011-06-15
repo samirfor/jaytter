@@ -49,7 +49,8 @@ public class AccountList extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        System.out.println("Tentando logar na api: " + this.account.getAccessToken());
+        System.out.println("Tentando logar na api: " + this.account.getUser());
+        // TODO Abrir janela da principal com a timeline
     }//GEN-LAST:event_buttonLoginActionPerformed
     private Account account;
     // Variables declaration - do not modify//GEN-BEGIN:variables
