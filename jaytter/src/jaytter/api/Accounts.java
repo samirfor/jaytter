@@ -17,7 +17,9 @@
 package jaytter.api;
 
 import java.util.ArrayList;
+import java.util.Properties;
 import models.Account;
+import storage.Configuration;
 import twitter4j.auth.AccessToken;
 
 /**
@@ -36,13 +38,19 @@ public class Accounts {
      * @return ArrayList<Account>
      */
     public ArrayList<Account> getStoredAccounts() {
-        // TODO Capturing this information from the database
-        
-        // This code below is only for tests
         ArrayList<Account> v = new ArrayList();
-        v.add(new Account("joao_neto"));
-        v.add(new Account(new AccessToken("370909999999999999999SXiYwdo", "5376Wi3D99999999999999991ShcjSrCbc"))); // samirfor
-        v.add(new Account("emanuellagomes"));
+        Configuration cnf = new Configuration();
+
+        ArrayList<Properties> accounts = cnf.getStoredAccounts();
+
+        if( accounts.isEmpty() ){
+            System.out.println( "No accounts" );
+            return v;
+        }
+
+        for( int i = 0; i < accounts.size(); i++ ){
+            v.add(new Account(accounts.get(i).getProperty("screen-name"), new AccessToken(accounts.get(i).getProperty("token"), accounts.get(i).getProperty("token-secret"))));
+        }
         return v;
     }
 }

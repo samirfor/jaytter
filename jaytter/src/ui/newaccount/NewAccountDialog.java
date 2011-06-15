@@ -123,8 +123,8 @@ public class NewAccountDialog extends javax.swing.JDialog {
                 OpenDefaultBrowser browser = new OpenDefaultBrowser(requestToken.getAuthorizationURL());
                 System.out.println(browser.getUrl());
                 browser.open();
-                JOptionPane.showConfirmDialog(this, "Clicking OK, your default browser will open to confirm access to Twitter. Please click Authorize.\n\n" + browser.getUrl(), "Auth", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                String pin = JOptionPane.showInputDialog("Paste the PIN code here:");
+                JOptionPane.showConfirmDialog(this, "Clicando em OK abrirá uma página no seu navegador, por favor clique em Autorizar adiante", "Autorizar aplicativo", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                String pin = JOptionPane.showInputDialog("Cole aqui o código que foi gerado:");
                 try {
                     if (pin.length() > 0) {
                         accessToken = twitter.getOAuthAccessToken(requestToken, pin);
@@ -133,7 +133,7 @@ public class NewAccountDialog extends javax.swing.JDialog {
                     }
                 } catch (TwitterException te) {
                     if (401 == te.getStatusCode()) {
-                        System.out.println("Unable to get the access token.");
+                        System.out.println("Código Errado! Tente de novo.");
                         JOptionPane.showMessageDialog(this, "Unable to get the access token.", "Erro API", JOptionPane.ERROR_MESSAGE);
                     } else {
                         continue;
@@ -142,9 +142,7 @@ public class NewAccountDialog extends javax.swing.JDialog {
             }
 
             Account account = new Account(twitter.verifyCredentials(), accessToken);
-//            account.save(); // TODO Save the credential in the database
-            System.out.println("Acesso autorizado:");
-            System.out.println(account.getUser());
+            account.storeAccessToken();
 
         } catch (Exception ex) {
             Logger.getLogger(NewAccountDialog.class.getName()).log(Level.SEVERE, null, ex);

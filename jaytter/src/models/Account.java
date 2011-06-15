@@ -15,9 +15,12 @@
  */
 package models;
 
+import java.io.File;
 import java.util.Date;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import storage.Configuration;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -43,7 +46,7 @@ public class Account {
     /** local private keys (token and secretToken) for OAuth */
     private AccessToken accessToken;
     /** informative date to store the date for signed */
-    private Date dateAdded;
+    private Date dateAdded = null;
     /** amount of login made ​​by user */
     private int loginTimes;
 
@@ -58,6 +61,11 @@ public class Account {
     public Account(User user, AccessToken accessToken) {
         this.user = user;
         this.name = user.getName();
+        this.accessToken = accessToken;
+    }
+
+    public Account(String name, AccessToken accessToken) {
+        this.name = name;
         this.accessToken = accessToken;
     }
 
@@ -114,11 +122,16 @@ public class Account {
         this.name = user.getName();
     }
 
-    /**
-     * TODO DB must to save token and token secret.
-     */
-    private void storeAccessToken() {
-        //store accessToken.getToken()
-        //store accessToken.getTokenSecret()
+    public void storeAccessToken() {
+        Configuration cnf = new Configuration();
+        Properties values = new Properties();
+
+        values.setProperty( "token", getAccessToken().getToken() );
+        values.setProperty( "token-secret", getAccessToken().getTokenSecret() );
+        if( getDateAdded() != null )
+            values.setProperty( "date-added", getDateAdded().toString() );
+        values.setProperty( "screen-name", getUser().getScreenName() );
+        values.setProperty( "name", getUser().getName() );
+        cnf.storeAccount( getUser().getScreenName(), values );
     }
 }
