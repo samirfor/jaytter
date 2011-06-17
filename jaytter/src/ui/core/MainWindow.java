@@ -89,6 +89,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelRTbyOthers = new javax.swing.JPanel();
         jTabbedPaneSearch = new javax.swing.JTabbedPane();
         jPanelProfile = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jPanelKeyword = new javax.swing.JPanel();
         jPanelMenuTopo = new javax.swing.JPanel();
         jPanelAvatar = new javax.swing.JPanel();
@@ -133,7 +134,6 @@ public class MainWindow extends javax.swing.JFrame {
         jTextArea1.setText("Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla tortor, elementum vel, tempor at, varius non, purus. Mauris vitae nisl nec metus placerat consectetuer. Donec ipsum. Proin imperdiet est. Phasellus dapibus semper urna. Pellentesque ornare, consectetuer nisl felis ac diam.");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTextArea1.setFocusTraversalKeysEnabled(false);
         jTextArea1.setFocusable(false);
         jTextArea1.setHighlighter(null);
         jScrollPane2.setViewportView(jTextArea1);
@@ -146,7 +146,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanelTweetAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelTweet1Layout.setVerticalGroup(
@@ -169,7 +169,7 @@ public class MainWindow extends javax.swing.JFrame {
             jPanelHomeAllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelHomeAllLayout.createSequentialGroup()
                 .addComponent(jPanelTweet1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(362, Short.MAX_VALUE))
         );
 
         jTabbedPaneHome.addTab("All", jPanelHomeAll);
@@ -178,11 +178,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelHomePublic.setLayout(jPanelHomePublicLayout);
         jPanelHomePublicLayout.setHorizontalGroup(
             jPanelHomePublicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 382, Short.MAX_VALUE)
+            .addGap(0, 447, Short.MAX_VALUE)
         );
         jPanelHomePublicLayout.setVerticalGroup(
             jPanelHomePublicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
 
         jTabbedPaneHome.addTab("Public", jPanelHomePublic);
@@ -191,11 +191,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelHomeConversation.setLayout(jPanelHomeConversationLayout);
         jPanelHomeConversationLayout.setHorizontalGroup(
             jPanelHomeConversationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 382, Short.MAX_VALUE)
+            .addGap(0, 447, Short.MAX_VALUE)
         );
         jPanelHomeConversationLayout.setVerticalGroup(
             jPanelHomeConversationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
 
         jTabbedPaneHome.addTab("Conversation", jPanelHomeConversation);
@@ -206,11 +206,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelMentionsAll.setLayout(jPanelMentionsAllLayout);
         jPanelMentionsAllLayout.setHorizontalGroup(
             jPanelMentionsAllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 382, Short.MAX_VALUE)
+            .addGap(0, 447, Short.MAX_VALUE)
         );
         jPanelMentionsAllLayout.setVerticalGroup(
             jPanelMentionsAllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
 
         jTabbedPaneMentions.addTab("All", jPanelMentionsAll);
@@ -219,11 +219,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelMentionsReply.setLayout(jPanelMentionsReplyLayout);
         jPanelMentionsReplyLayout.setHorizontalGroup(
             jPanelMentionsReplyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 382, Short.MAX_VALUE)
+            .addGap(0, 447, Short.MAX_VALUE)
         );
         jPanelMentionsReplyLayout.setVerticalGroup(
             jPanelMentionsReplyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
 
         jTabbedPaneMentions.addTab("Reply", jPanelMentionsReply);
@@ -234,11 +234,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelDMInbox.setLayout(jPanelDMInboxLayout);
         jPanelDMInboxLayout.setHorizontalGroup(
             jPanelDMInboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 382, Short.MAX_VALUE)
+            .addGap(0, 447, Short.MAX_VALUE)
         );
         jPanelDMInboxLayout.setVerticalGroup(
             jPanelDMInboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
 
         jTabbedPaneDMs.addTab("Inbox", jPanelDMInbox);
@@ -247,11 +247,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelDMOutbox.setLayout(jPanelDMOutboxLayout);
         jPanelDMOutboxLayout.setHorizontalGroup(
             jPanelDMOutboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 382, Short.MAX_VALUE)
+            .addGap(0, 447, Short.MAX_VALUE)
         );
         jPanelDMOutboxLayout.setVerticalGroup(
             jPanelDMOutboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
 
         jTabbedPaneDMs.addTab("Outbox", jPanelDMOutbox);
@@ -262,11 +262,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelRTRetweeted.setLayout(jPanelRTRetweetedLayout);
         jPanelRTRetweetedLayout.setHorizontalGroup(
             jPanelRTRetweetedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 382, Short.MAX_VALUE)
+            .addGap(0, 447, Short.MAX_VALUE)
         );
         jPanelRTRetweetedLayout.setVerticalGroup(
             jPanelRTRetweetedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
 
         jTabbedPaneRTs.addTab("Retweeted", jPanelRTRetweeted);
@@ -275,11 +275,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelRTbyMe.setLayout(jPanelRTbyMeLayout);
         jPanelRTbyMeLayout.setHorizontalGroup(
             jPanelRTbyMeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 382, Short.MAX_VALUE)
+            .addGap(0, 447, Short.MAX_VALUE)
         );
         jPanelRTbyMeLayout.setVerticalGroup(
             jPanelRTbyMeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
 
         jTabbedPaneRTs.addTab("RT by Me", jPanelRTbyMe);
@@ -288,26 +288,43 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelRTbyOthers.setLayout(jPanelRTbyOthersLayout);
         jPanelRTbyOthersLayout.setHorizontalGroup(
             jPanelRTbyOthersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 382, Short.MAX_VALUE)
+            .addGap(0, 447, Short.MAX_VALUE)
         );
         jPanelRTbyOthersLayout.setVerticalGroup(
             jPanelRTbyOthersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
 
         jTabbedPaneRTs.addTab("RT by Others", jPanelRTbyOthers);
 
         jTabbedMain.addTab("RTs", jTabbedPaneRTs);
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanelProfileLayout = new javax.swing.GroupLayout(jPanelProfile);
         jPanelProfile.setLayout(jPanelProfileLayout);
         jPanelProfileLayout.setHorizontalGroup(
             jPanelProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 382, Short.MAX_VALUE)
+            .addGroup(jPanelProfileLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(335, Short.MAX_VALUE))
         );
         jPanelProfileLayout.setVerticalGroup(
             jPanelProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGroup(jPanelProfileLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(358, Short.MAX_VALUE))
         );
 
         jTabbedPaneSearch.addTab("Profile", jPanelProfile);
@@ -316,11 +333,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelKeyword.setLayout(jPanelKeywordLayout);
         jPanelKeywordLayout.setHorizontalGroup(
             jPanelKeywordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 382, Short.MAX_VALUE)
+            .addGap(0, 447, Short.MAX_VALUE)
         );
         jPanelKeywordLayout.setVerticalGroup(
             jPanelKeywordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
 
         jTabbedPaneSearch.addTab("Keyword", jPanelKeyword);
@@ -329,7 +346,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanelAvatar.setMaximumSize(new java.awt.Dimension(73, 73));
         jPanelAvatar.setPreferredSize(new java.awt.Dimension(73, 73));
-        jPanelAvatar.setSize(new java.awt.Dimension(73, 73));
 
         javax.swing.GroupLayout jPanelAvatarLayout = new javax.swing.GroupLayout(jPanelAvatar);
         jPanelAvatar.setLayout(jPanelAvatarLayout);
@@ -350,7 +366,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelNewTweet.setLayout(jPanelNewTweetLayout);
         jPanelNewTweetLayout.setHorizontalGroup(
             jPanelNewTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
         );
         jPanelNewTweetLayout.setVerticalGroup(
             jPanelNewTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,7 +400,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedMain, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+                    .addComponent(jTabbedMain)
                     .addComponent(jPanelMenuTopo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(refreshButton))
                 .addContainerGap())
@@ -395,7 +411,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanelMenuTopo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedMain, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                .addComponent(jTabbedMain)
                 .addGap(4, 4, 4)
                 .addComponent(refreshButton))
         );
@@ -454,6 +470,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAvatar;
     private javax.swing.JPanel jPanelDMInbox;
     private javax.swing.JPanel jPanelDMOutbox;

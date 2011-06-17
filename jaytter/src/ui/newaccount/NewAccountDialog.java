@@ -25,6 +25,7 @@ package ui.newaccount;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import jaytter.ConsumerTokens;
 import models.Account;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -114,7 +115,7 @@ public class NewAccountDialog extends javax.swing.JDialog {
     private void authButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_authButtonActionPerformed
         AccessToken accessToken = null;
         Twitter twitter = new TwitterFactory().getInstance();
-        twitter.setOAuthConsumer("wHaPcyNhf4a7JBOf8I1ig", "YUtDUWZcEBsTUCzS5ZZygERcGwyflJ5iTvsSjU7Iv6g");
+        twitter.setOAuthConsumer(ConsumerTokens.KEY, ConsumerTokens.SECRET);
         RequestToken requestToken;
         try {
             requestToken = twitter.getOAuthRequestToken();

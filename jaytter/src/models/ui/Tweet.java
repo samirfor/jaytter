@@ -76,11 +76,9 @@ public class Tweet extends javax.swing.JPanel {
         jPanelTweetAvatar1.setFocusable(false);
         jPanelTweetAvatar1.setMaximumSize(new java.awt.Dimension(48, 48));
         jPanelTweetAvatar1.setMinimumSize(new java.awt.Dimension(48, 48));
-        jPanelTweetAvatar1.setSize(new java.awt.Dimension(48, 48));
 
         jLabel_Image.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel_Image.setMinimumSize(new java.awt.Dimension(48, 48));
-        jLabel_Image.setSize(new java.awt.Dimension(48, 48));
 
         org.jdesktop.layout.GroupLayout jPanelTweetAvatar1Layout = new org.jdesktop.layout.GroupLayout(jPanelTweetAvatar1);
         jPanelTweetAvatar1.setLayout(jPanelTweetAvatar1Layout);
@@ -108,7 +106,7 @@ public class Tweet extends javax.swing.JPanel {
                 .addContainerGap()
                 .add(jPanelTweetAvatar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -116,7 +114,7 @@ public class Tweet extends javax.swing.JPanel {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                    .add(jLabel1)
                     .add(jPanelTweetAvatar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
