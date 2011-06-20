@@ -14,19 +14,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package models.ui;
+package models;
 
-/** 
- * TODO Esta classe deverá completar o esqueleto de Message, formando
- * um DM completo.
+import javax.swing.JPanel;
+
+/**
+ * TODO Esta classe deverá criar um JPanel com um esqueleto dentro, 
+ * ou seja, a mensagem, imagem do profile, timestamp, botões, etc.
  * 
- * Uma DM é formada basicamente por:
- * - autor (herda de Message)
- * - destinatario
- * - texto (herda de Message)
- * - timestamp (herda de Message)
+ * Uma mensagem tem basicamente:
+ * - texto
+ * - autor
+ * - timestamp
  * 
  * @author samirfor
  */
-public class DirectMessage extends Message {
+public interface Message {
+    
 }

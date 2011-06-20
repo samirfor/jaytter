@@ -24,12 +24,13 @@ package ui.core;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
+import jaytter.ConsumerTokens;
+import models.Account;
+import ui.core.containers.Tweet;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
-import twitter4j.auth.AccessToken;
 
 /**
  * Project: JayTTer: A CrossPlatform Twitter Client
@@ -43,19 +44,15 @@ import twitter4j.auth.AccessToken;
 public class MainWindow extends javax.swing.JFrame {
 
     private Twitter twitter;
-    private AccessToken accessToken;
+    private Account account;
 
     /** Creates new form MainWindow */
-    public MainWindow() {
+    public MainWindow(Account account) {
         initComponents();
-        config();
-    }
-
-    public void config() {
+        this.account = account;
         twitter = new TwitterFactory().getInstance();
-        twitter.setOAuthConsumer("wHaPcyNhf4a7JBOf8I1ig", "YUtDUWZcEBsTUCzS5ZZygERcGwyflJ5iTvsSjU7Iv6g");
-        accessToken = new AccessToken("37090271-76kI0tpn8nDD68dJ5znixqgC7rslWF4OkwSXiYwdo", "5376Wi3DdwRYJTD78lXSnjRzXArmlhgrf1ShcjSrCbc");
-        twitter.setOAuthAccessToken(accessToken);
+        twitter.setOAuthConsumer(ConsumerTokens.KEY, ConsumerTokens.SECRET);
+        twitter.setOAuthAccessToken(account.getAccessToken());
     }
 
     /** This method is called from within the constructor to
@@ -66,6 +63,7 @@ public class MainWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         refreshButton = new javax.swing.JButton();
         jTabbedMain = new javax.swing.JTabbedPane();
@@ -75,6 +73,10 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelTweetAvatar1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jPanelTweet2 = new javax.swing.JPanel();
+        jPanelTweetAvatar2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
         jPanelHomePublic = new javax.swing.JPanel();
         jPanelHomeConversation = new javax.swing.JPanel();
         jTabbedPaneMentions = new javax.swing.JTabbedPane();
@@ -108,6 +110,8 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         jTabbedMain.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+
+        jPanelHomeAll.setLayout(new java.awt.GridBagLayout());
 
         jPanelTweetAvatar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanelTweetAvatar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -154,23 +158,79 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanelTweet1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTweet1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                    .addComponent(jPanelTweetAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                    .addGroup(jPanelTweet1Layout.createSequentialGroup()
+                        .addComponent(jPanelTweetAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        javax.swing.GroupLayout jPanelHomeAllLayout = new javax.swing.GroupLayout(jPanelHomeAll);
-        jPanelHomeAll.setLayout(jPanelHomeAllLayout);
-        jPanelHomeAllLayout.setHorizontalGroup(
-            jPanelHomeAllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelTweet1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 346;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        jPanelHomeAll.add(jPanelTweet1, gridBagConstraints);
+
+        jPanelTweetAvatar2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanelTweetAvatar2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanelTweetAvatar2.setFocusable(false);
+        jPanelTweetAvatar2.setMaximumSize(new java.awt.Dimension(48, 48));
+        jPanelTweetAvatar2.setMinimumSize(new java.awt.Dimension(48, 48));
+
+        javax.swing.GroupLayout jPanelTweetAvatar2Layout = new javax.swing.GroupLayout(jPanelTweetAvatar2);
+        jPanelTweetAvatar2.setLayout(jPanelTweetAvatar2Layout);
+        jPanelTweetAvatar2Layout.setHorizontalGroup(
+            jPanelTweetAvatar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 44, Short.MAX_VALUE)
         );
-        jPanelHomeAllLayout.setVerticalGroup(
-            jPanelHomeAllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelHomeAllLayout.createSequentialGroup()
-                .addComponent(jPanelTweet1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(362, Short.MAX_VALUE))
+        jPanelTweetAvatar2Layout.setVerticalGroup(
+            jPanelTweetAvatar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 44, Short.MAX_VALUE)
         );
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setEditable(false);
+        jTextArea2.setLineWrap(true);
+        jTextArea2.setRows(5);
+        jTextArea2.setText("Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla tortor, elementum vel, tempor at, varius non, purus. Mauris vitae nisl nec metus placerat consectetuer. Donec ipsum. Proin imperdiet est. Phasellus dapibus semper urna. Pellentesque ornare, consectetuer nisl felis ac diam.");
+        jTextArea2.setWrapStyleWord(true);
+        jTextArea2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTextArea2.setFocusable(false);
+        jTextArea2.setHighlighter(null);
+        jScrollPane3.setViewportView(jTextArea2);
+
+        javax.swing.GroupLayout jPanelTweet2Layout = new javax.swing.GroupLayout(jPanelTweet2);
+        jPanelTweet2.setLayout(jPanelTweet2Layout);
+        jPanelTweet2Layout.setHorizontalGroup(
+            jPanelTweet2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTweet2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelTweetAvatar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanelTweet2Layout.setVerticalGroup(
+            jPanelTweet2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTweet2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTweet2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, 0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanelTweet2Layout.createSequentialGroup()
+                        .addComponent(jPanelTweetAvatar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        jPanelHomeAll.add(jPanelTweet2, gridBagConstraints);
 
         jTabbedPaneHome.addTab("All", jPanelHomeAll);
 
@@ -178,11 +238,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelHomePublic.setLayout(jPanelHomePublicLayout);
         jPanelHomePublicLayout.setHorizontalGroup(
             jPanelHomePublicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 471, Short.MAX_VALUE)
         );
         jPanelHomePublicLayout.setVerticalGroup(
             jPanelHomePublicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
         );
 
         jTabbedPaneHome.addTab("Public", jPanelHomePublic);
@@ -191,11 +251,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelHomeConversation.setLayout(jPanelHomeConversationLayout);
         jPanelHomeConversationLayout.setHorizontalGroup(
             jPanelHomeConversationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 471, Short.MAX_VALUE)
         );
         jPanelHomeConversationLayout.setVerticalGroup(
             jPanelHomeConversationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
         );
 
         jTabbedPaneHome.addTab("Conversation", jPanelHomeConversation);
@@ -206,11 +266,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelMentionsAll.setLayout(jPanelMentionsAllLayout);
         jPanelMentionsAllLayout.setHorizontalGroup(
             jPanelMentionsAllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 471, Short.MAX_VALUE)
         );
         jPanelMentionsAllLayout.setVerticalGroup(
             jPanelMentionsAllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
         );
 
         jTabbedPaneMentions.addTab("All", jPanelMentionsAll);
@@ -219,11 +279,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelMentionsReply.setLayout(jPanelMentionsReplyLayout);
         jPanelMentionsReplyLayout.setHorizontalGroup(
             jPanelMentionsReplyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 471, Short.MAX_VALUE)
         );
         jPanelMentionsReplyLayout.setVerticalGroup(
             jPanelMentionsReplyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
         );
 
         jTabbedPaneMentions.addTab("Reply", jPanelMentionsReply);
@@ -234,11 +294,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelDMInbox.setLayout(jPanelDMInboxLayout);
         jPanelDMInboxLayout.setHorizontalGroup(
             jPanelDMInboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 471, Short.MAX_VALUE)
         );
         jPanelDMInboxLayout.setVerticalGroup(
             jPanelDMInboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
         );
 
         jTabbedPaneDMs.addTab("Inbox", jPanelDMInbox);
@@ -247,11 +307,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelDMOutbox.setLayout(jPanelDMOutboxLayout);
         jPanelDMOutboxLayout.setHorizontalGroup(
             jPanelDMOutboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 471, Short.MAX_VALUE)
         );
         jPanelDMOutboxLayout.setVerticalGroup(
             jPanelDMOutboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
         );
 
         jTabbedPaneDMs.addTab("Outbox", jPanelDMOutbox);
@@ -262,11 +322,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelRTRetweeted.setLayout(jPanelRTRetweetedLayout);
         jPanelRTRetweetedLayout.setHorizontalGroup(
             jPanelRTRetweetedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 471, Short.MAX_VALUE)
         );
         jPanelRTRetweetedLayout.setVerticalGroup(
             jPanelRTRetweetedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
         );
 
         jTabbedPaneRTs.addTab("Retweeted", jPanelRTRetweeted);
@@ -275,11 +335,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelRTbyMe.setLayout(jPanelRTbyMeLayout);
         jPanelRTbyMeLayout.setHorizontalGroup(
             jPanelRTbyMeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 471, Short.MAX_VALUE)
         );
         jPanelRTbyMeLayout.setVerticalGroup(
             jPanelRTbyMeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
         );
 
         jTabbedPaneRTs.addTab("RT by Me", jPanelRTbyMe);
@@ -288,11 +348,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelRTbyOthers.setLayout(jPanelRTbyOthersLayout);
         jPanelRTbyOthersLayout.setHorizontalGroup(
             jPanelRTbyOthersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 471, Short.MAX_VALUE)
         );
         jPanelRTbyOthersLayout.setVerticalGroup(
             jPanelRTbyOthersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
         );
 
         jTabbedPaneRTs.addTab("RT by Others", jPanelRTbyOthers);
@@ -317,14 +377,14 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanelProfileLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(335, Short.MAX_VALUE))
+                .addContainerGap(351, Short.MAX_VALUE))
         );
         jPanelProfileLayout.setVerticalGroup(
             jPanelProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelProfileLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(358, Short.MAX_VALUE))
+                .addContainerGap(282, Short.MAX_VALUE))
         );
 
         jTabbedPaneSearch.addTab("Profile", jPanelProfile);
@@ -333,11 +393,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelKeyword.setLayout(jPanelKeywordLayout);
         jPanelKeywordLayout.setHorizontalGroup(
             jPanelKeywordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 471, Short.MAX_VALUE)
         );
         jPanelKeywordLayout.setVerticalGroup(
             jPanelKeywordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
         );
 
         jTabbedPaneSearch.addTab("Keyword", jPanelKeyword);
@@ -366,7 +426,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelNewTweet.setLayout(jPanelNewTweetLayout);
         jPanelNewTweetLayout.setHorizontalGroup(
             jPanelNewTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
         );
         jPanelNewTweetLayout.setVerticalGroup(
             jPanelNewTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,7 +460,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedMain)
+                    .addComponent(jTabbedMain, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                     .addComponent(jPanelMenuTopo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(refreshButton))
                 .addContainerGap())
@@ -411,7 +471,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanelMenuTopo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedMain)
+                .addComponent(jTabbedMain, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
                 .addGap(4, 4, 4)
                 .addComponent(refreshButton))
         );
@@ -420,40 +480,19 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        config();
+//        config();
         List<Status> statuses = null;
         try {
             statuses = twitter.getFriendsTimeline();
         } catch (TwitterException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Showing friends timeline.");
+        System.out.println("Mostrando a timeline de "+account.getUser().getScreenName());
         for (Status status : statuses) {
-            System.out.println(status.getUser().getName() + ":"
+            System.out.println(status.getUser().getName() + " : "
                     + status.getUser().getProfileImageURL());
-            models.ui.Tweet tweet = new models.ui.Tweet(status);
-            JFrame frame = new JFrame("Title Bar Text");
-            frame.setSize(tweet.getSize());
-//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.getContentPane().add(tweet);
-            frame.pack();
-            frame.show();
-            frame.setVisible(true);
-            frame.add(tweet);
-//            this.remove(jPanelTweet1);
-//            this.add(tweet);
-//            jPanelHomeAll.setLayout(this.jPanelHomeAllLayout);
-//        jPanelHomeAllLayout.setHorizontalGroup(
-//            jPanelHomeAllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addComponent(jPanelTweet1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-//        );
-//        jPanelHomeAllLayout.setVerticalGroup(
-//            jPanelHomeAllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGroup(jPanelHomeAllLayout.createSequentialGroup()
-//                .addComponent(jPanelTweet1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-//                .addContainerGap(159, Short.MAX_VALUE))
-//        );
-            break;
+//            Tweet tweet = new Tweet(status);
+//            break;
         }
 
     }//GEN-LAST:event_refreshButtonActionPerformed
@@ -461,14 +500,14 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void __main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                new MainWindow().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//
+//            public void run() {
+//                new MainWindow().setVisible(true);
+//            }
+//        });
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAvatar;
@@ -487,9 +526,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelRTbyMe;
     private javax.swing.JPanel jPanelRTbyOthers;
     private javax.swing.JPanel jPanelTweet1;
+    private javax.swing.JPanel jPanelTweet2;
     private javax.swing.JPanel jPanelTweetAvatar1;
+    private javax.swing.JPanel jPanelTweetAvatar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedMain;
     private javax.swing.JTabbedPane jTabbedPaneDMs;
     private javax.swing.JTabbedPane jTabbedPaneHome;
@@ -497,6 +539,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPaneRTs;
     private javax.swing.JTabbedPane jTabbedPaneSearch;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextAreaNewTweet;
     private javax.swing.JButton refreshButton;
     // End of variables declaration//GEN-END:variables

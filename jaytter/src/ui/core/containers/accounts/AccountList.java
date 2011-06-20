@@ -5,13 +5,8 @@
  */
 package ui.core.containers.accounts;
 
-import jaytter.ConsumerTokens;
 import models.Account;
-import twitter4j.ResponseList;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.User;
+import ui.core.MainWindow;
 
 /**
  *
@@ -55,9 +50,12 @@ public class AccountList extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        System.out.println("Tentando logar na api: " + this.account.getUser());
+        System.out.println("Usuário autenticado: " + this.account.getUser().getScreenName());
         
+        MainWindow mainWindow = new MainWindow(account);
+        mainWindow.setVisible(true);
         
+        /*
         // Teste Pesquisa por Usuario
         Twitter twitter = new TwitterFactory().getInstance();
         twitter.setOAuthConsumer(ConsumerTokens.KEY, ConsumerTokens.SECRET);
@@ -72,7 +70,7 @@ public class AccountList extends javax.swing.JPanel {
         }
         // FIM Teste Pesquisa por Usuario
         // Está funcionando!
-        
+        */
         // TODO Abrir janela da principal com a timeline
     }//GEN-LAST:event_buttonLoginActionPerformed
     private Account account;

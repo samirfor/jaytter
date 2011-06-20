@@ -13,7 +13,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package models.ui;
+package ui.core.containers;
 
 import java.awt.Image;
 import java.io.IOException;
@@ -45,7 +45,7 @@ public class Tweet extends javax.swing.JPanel {
     public Tweet(Status status) {
         initComponents();
         loadProfileImage(status.getUser().getProfileImageURL());
-        jLabel1.setText(status.getText());
+        message.setText(status.getText());
     }
     
     private void loadProfileImage(URL source) {
@@ -55,7 +55,7 @@ public class Tweet extends javax.swing.JPanel {
         } catch (IOException ex) {
             Logger.getLogger(Tweet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        jLabel_Image.setIcon(new ImageIcon(image));
+        avatar.setIcon(new ImageIcon(image));
     }
 
     /** This method is called from within the constructor to
@@ -67,36 +67,38 @@ public class Tweet extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelTweetAvatar1 = new javax.swing.JPanel();
-        jLabel_Image = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jPanelAvatar = new javax.swing.JPanel();
+        avatar = new javax.swing.JLabel();
+        message = new javax.swing.JLabel();
 
-        jPanelTweetAvatar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanelTweetAvatar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanelTweetAvatar1.setFocusable(false);
-        jPanelTweetAvatar1.setMaximumSize(new java.awt.Dimension(48, 48));
-        jPanelTweetAvatar1.setMinimumSize(new java.awt.Dimension(48, 48));
+        setBackground(new java.awt.Color(0, 102, 102));
 
-        jLabel_Image.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel_Image.setMinimumSize(new java.awt.Dimension(48, 48));
+        jPanelAvatar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanelAvatar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanelAvatar.setFocusable(false);
+        jPanelAvatar.setMaximumSize(new java.awt.Dimension(48, 48));
+        jPanelAvatar.setMinimumSize(new java.awt.Dimension(48, 48));
 
-        org.jdesktop.layout.GroupLayout jPanelTweetAvatar1Layout = new org.jdesktop.layout.GroupLayout(jPanelTweetAvatar1);
-        jPanelTweetAvatar1.setLayout(jPanelTweetAvatar1Layout);
-        jPanelTweetAvatar1Layout.setHorizontalGroup(
-            jPanelTweetAvatar1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanelTweetAvatar1Layout.createSequentialGroup()
-                .add(jLabel_Image, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        avatar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        avatar.setMinimumSize(new java.awt.Dimension(48, 48));
+
+        org.jdesktop.layout.GroupLayout jPanelAvatarLayout = new org.jdesktop.layout.GroupLayout(jPanelAvatar);
+        jPanelAvatar.setLayout(jPanelAvatarLayout);
+        jPanelAvatarLayout.setHorizontalGroup(
+            jPanelAvatarLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanelAvatarLayout.createSequentialGroup()
+                .add(avatar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
-        jPanelTweetAvatar1Layout.setVerticalGroup(
-            jPanelTweetAvatar1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanelTweetAvatar1Layout.createSequentialGroup()
-                .add(jLabel_Image, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        jPanelAvatarLayout.setVerticalGroup(
+            jPanelAvatarLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanelAvatarLayout.createSequentialGroup()
+                .add(avatar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("<html><p>O @zanata_arnos dissecou o Peñarol no Blog do Mauro Cezar. Leitura obrigatória para quem verá a final hoje: http://bit.ly/geFuSC.</p></html>");
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        message.setText("<html><p>O @zanata_arnos dissecou o Peñarol no Blog do Mauro Cezar. Leitura obrigatória para quem verá a final hoje: http://bit.ly/geFuSC.</p></html>");
+        message.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -104,9 +106,9 @@ public class Tweet extends javax.swing.JPanel {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanelTweetAvatar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jPanelAvatar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                .add(message, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -114,14 +116,14 @@ public class Tweet extends javax.swing.JPanel {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel1)
-                    .add(jPanelTweetAvatar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(message)
+                    .add(jPanelAvatar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel_Image;
-    private javax.swing.JPanel jPanelTweetAvatar1;
+    private javax.swing.JLabel avatar;
+    private javax.swing.JPanel jPanelAvatar;
+    private javax.swing.JLabel message;
     // End of variables declaration//GEN-END:variables
 }
