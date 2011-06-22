@@ -56,7 +56,6 @@ public class Configuration {
     public ArrayList<Properties> getStoredAccounts() {
         ArrayList<Properties> arr = new ArrayList();
         String[] list = configDir.list(new FilenameFilter() {
-
             public boolean accept(File dir, String name) {
                 return name.startsWith(ACCOUNT_FILE_PREFIX);
             }
