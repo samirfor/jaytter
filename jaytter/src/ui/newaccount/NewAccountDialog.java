@@ -22,6 +22,7 @@
  */
 package ui.newaccount;
 
+import java.awt.Frame;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -32,6 +33,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
+import ui.core.InitWindow;
 import util.OpenDefaultBrowser;
 
 /**
@@ -39,11 +41,14 @@ import util.OpenDefaultBrowser;
  * @author joao-nb
  */
 public class NewAccountDialog extends javax.swing.JDialog {
+    
+    private Frame parentFrame;
 
     /** Creates new form NewAccountDialog */
     public NewAccountDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.parentFrame = parent;
     }
 
     /** This method is called from within the constructor to
@@ -145,6 +150,10 @@ public class NewAccountDialog extends javax.swing.JDialog {
             Account account = new Account(twitter.verifyCredentials(), accessToken);
             account.storeAccessToken();
             // TODO Inserir dados na tela dos logins
+            parentFrame.dispose();
+            InitWindow initWindow = new InitWindow();
+            initWindow.setVisible(true);
+            
             this.dispose(); // fecha a janela corrente
             
         } catch (Exception ex) {

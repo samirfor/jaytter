@@ -162,7 +162,7 @@ public class InitWindow extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void setupComponents() {
-        AccountsList listaDeContas = new AccountsList();
+        AccountsList listaDeContas = new AccountsList(this);
         this.painelContas.add(listaDeContas);
     }
 }

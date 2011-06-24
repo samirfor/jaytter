@@ -13,24 +13,21 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-
-/*
- * MainWindow.java
- *
- * Created on 07/04/2011, 09:56:11
- */
 package ui.core;
 
 import java.awt.Color;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JFrame;
 import jaytter.ConsumerTokens;
 import models.Account;
-import ui.core.containers.Tweet;
+import threads.Timeline;
 import twitter4j.Status;
-import twitter4j.Twitter;
 import twitter4j.TwitterException;
+import ui.core.containers.Tweet;
+import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 
 /**
@@ -38,24 +35,24 @@ import twitter4j.TwitterFactory;
  * File name: MainWindow.java
  * Description:  This is a window for general use.
  *
- * @author samir
- *
  * @see The GNU Public License (GPL) v3
  */
 public class MainWindow extends javax.swing.JFrame {
 
     private Twitter twitter;
     private Account account;
+    private JFrame parentFrame;
+
     /** Creates new form MainWindow */
-    public MainWindow(Account account) {
+    public MainWindow(JFrame parentFrame, Account account) {
         initComponents();
+        this.parentFrame = parentFrame;
         this.account = account;
         twitter = new TwitterFactory().getInstance();
         twitter.setOAuthConsumer(ConsumerTokens.KEY, ConsumerTokens.SECRET);
         twitter.setOAuthAccessToken(account.getAccessToken());
-
-
-        addTweets();
+        this.setTitle("@" + account.getUser().getScreenName() + " - " + account.getUser().getName());
+        addTimeline();
     }
 
     /** This method is called from within the constructor to
@@ -66,7 +63,6 @@ public class MainWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -87,8 +83,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(500, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 102, 255));
 
@@ -133,7 +135,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(319, Short.MAX_VALUE)
+                .addContainerGap(320, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(55, 55, 55))
         );
@@ -177,44 +179,88 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addTweets() {
-        Tweet panelTweetLocal;
-        for( int i = 0; i < 40; i++ ){
-            panelTweetLocal = new Tweet();
-            javax.swing.GroupLayout panelTweetLayout = new javax.swing.GroupLayout(panelTweetLocal);
-            panelTweetLocal.setLayout(panelTweetLayout);
-            panelTweetLayout.setHorizontalGroup(
-                    panelTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 369, Short.MAX_VALUE));
-            panelTweetLayout.setVerticalGroup(
-                    panelTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 100, Short.MAX_VALUE));
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        InitWindow initWindow = new InitWindow();
+        initWindow.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
-            java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = i;
-            gridBagConstraints.weightx = 20.0;
-
-            if( i % 2 == 0 ) {
-                panelTweetLocal.setBackground( Color.getHSBColor(100, 200, 100 ) );
-            } else {
-                panelTweetLocal.setBackground( Color.getHSBColor(200, 100, 200 ) );
-            }
-            jPanel7.add(panelTweetLocal, gridBagConstraints);
-        }
-
-        jPanel7.repaint();
+    private void addTimeline() {
+        Timeline timeline = new Timeline(twitter, jPanel7);
+        timeline.start();
     }
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        java.awt.EventQueue.invokeLater(new Runnable() {
+
+    private void addTweets() {
+        Tweet panelSingleTweet;
+        List<Status> statuses;
+
+        try {
+            statuses = twitter.getFriendsTimeline();
+
+            System.out.println("Showing friends timeline.");
+            for (Status status : statuses) {
+                int i = 0;
+                System.out.println(status.getUser().getName() + ":"
+                        + status.getText());
+
+                panelSingleTweet = new Tweet(status);
+                javax.swing.GroupLayout panelTweetLayout = new javax.swing.GroupLayout(panelSingleTweet);
+                panelSingleTweet.setLayout(panelTweetLayout);
+                panelTweetLayout.setAutoCreateGaps(true);
+                panelTweetLayout.setAutoCreateContainerGaps(true);
+
+                panelTweetLayout.setHorizontalGroup(panelTweetLayout.createSequentialGroup().addComponent(panelSingleTweet.getAvatar()).addGroup(panelTweetLayout.createParallelGroup(Alignment.LEADING).addComponent(panelSingleTweet.getMessage())));
+                panelTweetLayout.setVerticalGroup(panelTweetLayout.createSequentialGroup().addGroup(panelTweetLayout.createParallelGroup()).addComponent(panelSingleTweet.getAvatar()).addComponent(panelSingleTweet.getMessage()));
+
+
+//                panelTweetLayout.setHorizontalGroup(
+//                        panelTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 369, Short.MAX_VALUE));
+//                panelTweetLayout.setVerticalGroup(
+//                        panelTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 100, Short.MAX_VALUE));
 //
-//            public void run() {
-//                new MainWindow().setVisible(true);
+//                java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+//                gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+//                gridBagConstraints.gridx = 0;
+//                gridBagConstraints.gridy = i;
+//                gridBagConstraints.weightx = 20.0;
+
+                if (i % 2 == 0) {
+                    panelSingleTweet.setBackground(Color.getHSBColor(100, 200, 100));
+                } else {
+                    panelSingleTweet.setBackground(Color.getHSBColor(200, 100, 200));
+                }
+                jPanel7.add(panelSingleTweet);
+                jPanel7.repaint();
+                i++;
+            }
+        } catch (TwitterException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+        }
+//        for (int i = 0; i < 40; i++) {
+//            panelTweetLocal = new Tweet();
+//            javax.swing.GroupLayout panelTweetLayout = new javax.swing.GroupLayout(panelTweetLocal);
+//            panelTweetLocal.setLayout(panelTweetLayout);
+//            panelTweetLayout.setHorizontalGroup(
+//                    panelTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 369, Short.MAX_VALUE));
+//            panelTweetLayout.setVerticalGroup(
+//                    panelTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 100, Short.MAX_VALUE));
+//
+//            java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+//            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+//            gridBagConstraints.gridx = 0;
+//            gridBagConstraints.gridy = i;
+//            gridBagConstraints.weightx = 20.0;
+//
+//            if (i % 2 == 0) {
+//                panelTweetLocal.setBackground(Color.getHSBColor(100, 200, 100));
+//            } else {
+//                panelTweetLocal.setBackground(Color.getHSBColor(200, 100, 200));
 //            }
-//        });
-//    }
+//            jPanel7.add(panelTweetLocal, gridBagConstraints);
+//            jPanel7.repaint();
+//        }
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

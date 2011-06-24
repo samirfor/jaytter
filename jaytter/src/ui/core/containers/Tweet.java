@@ -12,7 +12,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package ui.core.containers;
 
 import java.awt.Image;
@@ -22,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import twitter4j.Status;
 
 /**
@@ -41,13 +41,13 @@ public class Tweet extends javax.swing.JPanel {
     public Tweet() {
         initComponents();
     }
-    
+
     public Tweet(Status status) {
         initComponents();
         loadProfileImage(status.getUser().getProfileImageURL());
         message.setText(status.getText());
     }
-    
+
     private void loadProfileImage(URL source) {
         Image image = null;
         try {
@@ -58,6 +58,24 @@ public class Tweet extends javax.swing.JPanel {
         avatar.setIcon(new ImageIcon(image));
     }
 
+    public JLabel getAvatar() {
+        return avatar;
+    }
+
+    public JLabel getMessage() {
+        return message;
+    }
+
+    public void setAvatar(JLabel avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setMessage(JLabel message) {
+        this.message = message;
+    }
+    
+    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -67,62 +85,41 @@ public class Tweet extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelAvatar = new javax.swing.JPanel();
-        avatar = new javax.swing.JLabel();
         message = new javax.swing.JLabel();
+        avatar = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(0, 102, 102));
-
-        jPanelAvatar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanelAvatar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanelAvatar.setFocusable(false);
-        jPanelAvatar.setMaximumSize(new java.awt.Dimension(48, 48));
-        jPanelAvatar.setMinimumSize(new java.awt.Dimension(48, 48));
-
-        avatar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        avatar.setMinimumSize(new java.awt.Dimension(48, 48));
-
-        org.jdesktop.layout.GroupLayout jPanelAvatarLayout = new org.jdesktop.layout.GroupLayout(jPanelAvatar);
-        jPanelAvatar.setLayout(jPanelAvatarLayout);
-        jPanelAvatarLayout.setHorizontalGroup(
-            jPanelAvatarLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanelAvatarLayout.createSequentialGroup()
-                .add(avatar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
-        jPanelAvatarLayout.setVerticalGroup(
-            jPanelAvatarLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanelAvatarLayout.createSequentialGroup()
-                .add(avatar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
+        setBackground(new java.awt.Color(206, 252, 144));
 
         message.setText("<html><p>O @zanata_arnos dissecou o Peñarol no Blog do Mauro Cezar. Leitura obrigatória para quem verá a final hoje: http://bit.ly/geFuSC.</p></html>");
         message.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        avatar.setAlignmentY(0.0F);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanelAvatar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(24, 24, 24)
-                .add(message, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(92, Short.MAX_VALUE)
+                .add(message, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 368, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(layout.createSequentialGroup()
+                    .add(0, 0, 0)
+                    .add(avatar)
+                    .addContainerGap(460, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(message, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                    .add(jPanelAvatar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+            .add(message, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(layout.createSequentialGroup()
+                    .add(0, 0, 0)
+                    .add(avatar)
+                    .addContainerGap(68, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel avatar;
-    private javax.swing.JPanel jPanelAvatar;
     private javax.swing.JLabel message;
     // End of variables declaration//GEN-END:variables
 }

@@ -32,7 +32,7 @@ public class LoginWindow extends javax.swing.JFrame {
     /** Creates new form LoginWindow */
     public LoginWindow() {
         initComponents();
-        this.painelContas.add(new AccountsList(), java.awt.BorderLayout.CENTER);
+        this.painelContas.add(new AccountsList(this), java.awt.BorderLayout.CENTER);
     }
 
     /** This method is called from within the constructor to

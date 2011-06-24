@@ -5,6 +5,7 @@
  */
 package ui.core.containers.accounts;
 
+import javax.swing.JFrame;
 import models.Account;
 import ui.core.MainWindow;
 
@@ -13,10 +14,13 @@ import ui.core.MainWindow;
  * @author joaoneto
  */
 public class AccountList extends javax.swing.JPanel {
+    
+    private JFrame parentFrame;
 
     /** Creates new form AccountList */
-    public AccountList(Account account) {
+    public AccountList(JFrame parentFrame, Account account) {
         initComponents();
+        this.parentFrame = parentFrame;
         this.account = account;
         this.accountName.setText(account.getName());
     }
@@ -52,8 +56,9 @@ public class AccountList extends javax.swing.JPanel {
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         System.out.println("Usuário autenticado: " + this.account.getUser().getScreenName());
         
-        MainWindow mainWindow = new MainWindow(account);
+        MainWindow mainWindow = new MainWindow(parentFrame, account);
         mainWindow.setVisible(true);
+        parentFrame.dispose();
         
         /*
         // Teste Pesquisa por Usuario
@@ -71,7 +76,6 @@ public class AccountList extends javax.swing.JPanel {
         // FIM Teste Pesquisa por Usuario
         // Está funcionando!
         */
-        // TODO Abrir janela da principal com a timeline
     }//GEN-LAST:event_buttonLoginActionPerformed
     private Account account;
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -7,6 +7,7 @@ package ui.core.containers;
 
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import jaytter.api.Accounts;
 import models.Account;
 import ui.core.containers.accounts.AccountList;
@@ -17,10 +18,16 @@ import ui.core.containers.accounts.AccountList;
  */
 public final class AccountsList extends javax.swing.JPanel {
 
+    private JFrame parentFrame;
     private ArrayList<Account> storedAccounts;
 
     /** Creates new form AccountsList */
-    public AccountsList() {
+//    public AccountsList() {
+//        initComponents();
+//        addAccountsToList();
+//    }
+    public AccountsList(JFrame parentFrame) {
+        this.parentFrame = parentFrame;
         initComponents();
         addAccountsToList();
     }
@@ -36,7 +43,7 @@ public final class AccountsList extends javax.swing.JPanel {
 
     private void addAccountToPanel(Account a) {
         ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/jaytter/images/intents-assets/intents-assets/bird/bird_gray/bird_16_gray.png"));
-        this.accountsTag.addTab("", icon, new AccountList(a));
+        this.accountsTag.addTab("", icon, new AccountList(parentFrame, a));
     }
 
     /** This method is called from within the constructor to
