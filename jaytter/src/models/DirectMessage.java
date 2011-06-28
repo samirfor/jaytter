@@ -18,6 +18,11 @@ package models;
 
 import models.Message;
 
+import twitter4j.DirectMessage;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+
 /** 
  * TODO Esta classe deverá completar o esqueleto de Message, formando
  * um DM completo.
@@ -31,4 +36,25 @@ import models.Message;
  * @author samirfor
  */
 public class DirectMessage implements Message {
+    public static void main(String[] args) {
+        if (args.length < 2) {
+            System.out.println("Usage: java twitter4j.examples.directmessage.SendDirectMessage [recipient screen name] [message]");
+            System.exit(-1);
+        }
+        Twitter twitter = new TwitterFactory().getInstance();
+        try {
+            DirectMessage message = twitter.sendDirectMessage(args[0], args[1]);
+            System.out.println("Mensagem direta enviada com sucesso para " + message.getRecipientScreenName());
+            System.exit(0);
+        } catch (TwitterException te) {
+            te.printStackTrace();
+            System.out.println("Falha ao enviar mensagem direta: " + te.getMessage());
+            System.exit(-1);
+        }
+    }
+
+    private String getRecipientScreenName() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
+
