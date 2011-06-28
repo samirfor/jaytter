@@ -17,11 +17,15 @@ import java.util.List;
  */
 public class SearchTweets {
 
-    public static void main(String[] args) {
+    String search;
+
+    public SearchTweets (String search) {
         
+        this.search = search;
+
         Twitter twitter = new TwitterFactory().getInstance();
         try {
-            QueryResult result = twitter.search(new Query(args[0]));
+            QueryResult result = twitter.search(new Query(search));
             List<Tweet> tweets = result.getTweets();
             for (Tweet tweet : tweets) {
                 System.out.println("@" + tweet.getFromUser() + " - " + tweet.getText());
