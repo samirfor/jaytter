@@ -18,10 +18,7 @@ import java.util.List;
 public class SearchTweets {
 
     public static void main(String[] args) {
-        if (args.length < 1) {
-            System.out.println("java twitter4j.examples.search.SearchTweets [query]");
-            System.exit(-1);
-        }
+        
         Twitter twitter = new TwitterFactory().getInstance();
         try {
             QueryResult result = twitter.search(new Query(args[0]));
@@ -32,7 +29,7 @@ public class SearchTweets {
             System.exit(0);
         } catch (TwitterException te) {
             te.printStackTrace();
-            System.out.println("Failed to search tweets: " + te.getMessage());
+            System.out.println("Falha na busca por tweets: " + te.getMessage());
             System.exit(-1);
         }
     }
