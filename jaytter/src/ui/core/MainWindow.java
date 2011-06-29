@@ -331,6 +331,8 @@ public class MainWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Erro ao enviar tweet. Tente novamente.\n"+ex.getMessage(), "Enviando tweet", JOptionPane.ERROR_MESSAGE);
         }
         System.out.println("Successfully updated the status.");
+        statusLabel.setText("Tweet enviado com sucesso!");
+        tweetTextArea.setText("");
     }//GEN-LAST:event_tweetButtonActionPerformed
 
     private void addTimeline() {
