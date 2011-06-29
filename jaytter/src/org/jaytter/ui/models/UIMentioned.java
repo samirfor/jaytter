@@ -25,11 +25,11 @@ import org.jaytter.ui.panels.impl.GenericTweetTimelinePanel;
  * @author Jaytter Team
  */
 public class UIMentioned extends GenericTweetTimelinePanel {
-    public UIMentioned()
-    {
-        super( "Mentioned" );
+
+    public UIMentioned() {
+        super("Mentioned");
     }
-    
+
     public void appendTweet(Tweet tweet) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -37,5 +37,9 @@ public class UIMentioned extends GenericTweetTimelinePanel {
     public void appendTweets(ArrayList<Tweet> tweets) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
+    @Override
+    public void update() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

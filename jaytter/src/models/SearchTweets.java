@@ -1,5 +1,3 @@
-
-
 package models;
 
 import twitter4j.Query;
@@ -19,8 +17,8 @@ public class SearchTweets {
 
     String search;
 
-    public SearchTweets (String search) {
-        
+    public SearchTweets(String search) {
+
         this.search = search;
 
         Twitter twitter = new TwitterFactory().getInstance();
@@ -34,8 +32,6 @@ public class SearchTweets {
         } catch (TwitterException te) {
             te.printStackTrace();
             System.out.println("Falha na busca por tweets: " + te.getMessage());
-            System.exit(-1);
         }
     }
-
 }

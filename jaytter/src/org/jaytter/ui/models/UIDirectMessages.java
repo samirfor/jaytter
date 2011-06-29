@@ -38,5 +38,10 @@ public class UIDirectMessages extends GenericTweetTimelinePanel {
     public void appendTweets(ArrayList<Tweet> tweets) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public void update() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }

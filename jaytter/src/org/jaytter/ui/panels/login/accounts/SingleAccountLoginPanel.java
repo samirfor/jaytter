@@ -6,7 +6,7 @@ import org.jaytter.model.user.TwitterAccount;
 import org.jaytter.ui.manager.JaytterUIManager;
 
 public class SingleAccountLoginPanel extends javax.swing.JPanel {
-    
+
     private JFrame parentFrame;
 
     /** Creates new form SingleAccountLoginPanel */
@@ -30,7 +30,7 @@ public class SingleAccountLoginPanel extends javax.swing.JPanel {
         accountName = new javax.swing.JLabel();
         buttonLogin = new javax.swing.JButton();
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jaytter/images/intents-assets/intents-assets/bird/bird_gray/bird_32_gray.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jaytter/images/intents-assets/intents-assets/bird/bird_gray/bird_32_gray.png"))); // NOI18N
         add(jLabel1);
 
         accountName.setFont(accountName.getFont().deriveFont(accountName.getFont().getStyle() | java.awt.Font.BOLD));

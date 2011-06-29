@@ -31,7 +31,7 @@ public class UITimeline extends GenericTweetTimelinePanel {
     public UITimeline() {
         super("timeline");
 
-        setupThread();
+//        setupThread();
     }
 
     private void setupThread() {
@@ -40,10 +40,23 @@ public class UITimeline extends GenericTweetTimelinePanel {
             Twitter twitter = JaytterUIAccountManager.getInstance().getTwitterInstance();
 
             for (Status status : twitter.getFriendsTimeline()) {
-                insertStatus( status );
+                insertStatus(status);
             }
         } catch (TwitterException ex) {
             System.out.println("erro!" + ex.getMessage());
         }
+    }
+
+    public void update() {
+        Runnable runnable = new Runnable() {
+
+            public void run() {
+                System.out.println("[debug] Timeline Thread");
+                setupThread();
+            }
+        };
+        
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 }

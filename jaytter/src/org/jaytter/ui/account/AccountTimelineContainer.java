@@ -131,37 +131,34 @@ public class AccountTimelineContainer extends javax.swing.JFrame {
         setBounds((screenSize.width-435)/2, (screenSize.height-619)/2, 435, 619);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setCurrentTimelinePanel( JPanel timelinePanel )
-    {
+    public void setCurrentTimelinePanel(JPanel timelinePanel) {
 //        tabsPanel.removeAll(); //remove all antecessors
-        System.out.println( "[debug] adding panel timelinepanel to the frame" );
+        System.out.println("[debug] adding panel timelinepanel to the frame");
         tabsPanel.removeAll();
         tabsPanel.validate(); //validates the remove
-        
-        tabsPanel.add( timelinePanel,java.awt.BorderLayout.CENTER);
+
+        tabsPanel.add(timelinePanel, java.awt.BorderLayout.CENTER);
         tabsPanel.repaint();
         tabsPanel.validate(); //validates the repaint (Java sucks)
     }
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-
     }//GEN-LAST:event_formWindowClosing
 
     private void buttonPublicTimelineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPublicTimelineActionPerformed
-        changePanel( JaytterUIAccountManager.PANEL_PUBLIC_TIMELINE );
+        changePanel(JaytterUIAccountManager.PANEL_PUBLIC_TIMELINE);
     }//GEN-LAST:event_buttonPublicTimelineActionPerformed
 
     private void buttonRetweetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRetweetActionPerformed
-        changePanel( JaytterUIAccountManager.PANEL_RETWEETS );
+        changePanel(JaytterUIAccountManager.PANEL_RETWEETS);
     }//GEN-LAST:event_buttonRetweetActionPerformed
 
     private void buttonMentionedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMentionedActionPerformed
-        changePanel( JaytterUIAccountManager.PANEL_MENTIONED );
+        changePanel(JaytterUIAccountManager.PANEL_MENTIONED);
     }//GEN-LAST:event_buttonMentionedActionPerformed
 
     private void buttonDirectMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDirectMessageActionPerformed
-        changePanel( JaytterUIAccountManager.PANEL_DIRECTMESSAGES );
+        changePanel(JaytterUIAccountManager.PANEL_DIRECTMESSAGES);
     }//GEN-LAST:event_buttonDirectMessageActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonDirectMessage;
     private javax.swing.JButton buttonMentioned;
@@ -174,8 +171,8 @@ public class AccountTimelineContainer extends javax.swing.JFrame {
     private javax.swing.JScrollPane tabsPanelScroll;
     // End of variables declaration//GEN-END:variables
 
-    private void changePanel(String panelName ) {
-        System.out.println( "[debug] changing ui timeline panel to " + panelName );
-        JaytterUIAccountManager.getInstance().changeActiveTimelinePanel( panelName );
+    private void changePanel(String panelName) {
+        System.out.println("[debug] changing ui timeline panel to " + panelName);
+        JaytterUIAccountManager.getInstance().changeActiveTimelinePanel(panelName);
     }
 }

@@ -29,7 +29,7 @@ import twitter4j.Status;
  *
  * @author Jaytter Team
  */
-public class GenericTweetTimelinePanel extends javax.swing.JPanel {
+public abstract class GenericTweetTimelinePanel extends javax.swing.JPanel {
 
     protected int grid_current_x  = 0;
     protected int grid_current_y  = 0;
@@ -70,4 +70,6 @@ public class GenericTweetTimelinePanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new Insets(3, 3, 3, 3);
         add(p, gridBagConstraints);
     }
+    
+    public abstract void update();
 }

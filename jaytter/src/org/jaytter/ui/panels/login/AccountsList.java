@@ -36,7 +36,7 @@ public final class AccountsList extends javax.swing.JPanel {
     }
 
     private void addAccountToPanel(TwitterAccount a) {
-        ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/jaytter/images/intents-assets/intents-assets/bird/bird_gray/bird_16_gray.png"));
+        ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/org/jaytter/images/intents-assets/intents-assets/bird/bird_gray/bird_16_gray.png"));
         this.accountsTag.addTab("", icon, new SingleAccountLoginPanel(parentFrame, a));
     }
 

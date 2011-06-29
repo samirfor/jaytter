@@ -30,25 +30,23 @@ import twitter4j.User;
  */
 public class SearchUsers {
 
-    
     String search;
-    //    public static void main (String args[]){
-        public SearchUsers(String search ){
-    
-            this.search = search;
 
-       // Teste Pesquisa por Usuario
+    public SearchUsers(String search) {
+
+        this.search = search;
+
+        // Teste Pesquisa por Usuario
         Twitter twitter = new TwitterFactory().getInstance();
         twitter.setOAuthConsumer(ConsumerTokens.KEY, ConsumerTokens.SECRET);
-//        twitter.setOAuthAccessToken(account.getAccessToken());
         try {
             ResponseList<User> searchUsers = twitter.searchUsers(search, 1);
-            for(User user : searchUsers) {
-                System.out.println(user.getName()+ " - " + user.getScreenName());
+            for (User user : searchUsers) {
+                System.out.println(user.getName() + " - " + user.getScreenName());
             }
-        } catch(TwitterException te) {
+        } catch (TwitterException te) {
             System.out.println(te.getMessage());
         }
-       
-        }
+
+    }
 }

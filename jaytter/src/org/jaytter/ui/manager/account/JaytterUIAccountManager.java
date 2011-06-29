@@ -21,7 +21,6 @@ import javax.swing.JFrame;
 import jaytter.ConsumerTokens;
 import org.jaytter.model.user.TwitterAccount;
 import org.jaytter.ui.account.AccountTimelineContainer;
-import org.jaytter.ui.manager.JaytterUIManager;
 import org.jaytter.ui.models.UIDirectMessages;
 import org.jaytter.ui.models.UIMentioned;
 import org.jaytter.ui.models.UIRetweet;
@@ -36,18 +35,16 @@ import twitter4j.TwitterFactory;
  */
 public class JaytterUIAccountManager {
     //names of ui panel timeline
+
     public static final String PANEL_PUBLIC_TIMELINE = "timeline";
     public static final String PANEL_RETWEETS = "retweets";
     public static final String PANEL_DIRECTMESSAGES = "directmessage";
     public static final String PANEL_SEARCH = "search";
     public static final String PANEL_MENTIONED = "mentioned";
-
     private HashMap uiTimelinesPanel = new HashMap();
-
     private AccountTimelineContainer uiAccountTimeline;
-    
-    private TwitterAccount          twitterUser;
-    
+    private TwitterAccount twitterUser;
+
     private JaytterUIAccountManager() {
         uiAccountTimeline = new AccountTimelineContainer();
     }
@@ -56,25 +53,24 @@ public class JaytterUIAccountManager {
         return JaytterUIAccountManagerHolder.INSTANCE;
     }
 
-    public TwitterAccount getUser()
-    {
+    public TwitterAccount getUser() {
         return twitterUser;
     }
-    
-    public Twitter getTwitterInstance()
-    {
+
+    public Twitter getTwitterInstance() {
         Twitter twitter = new TwitterFactory().getInstance();
         twitter.setOAuthConsumer(ConsumerTokens.KEY, ConsumerTokens.SECRET);
         twitter.setOAuthAccessToken(getUser().getAccessToken());
-        
+
         return twitter;
     }
+
     public void setupAccount(TwitterAccount acc) {
         twitterUser = acc;
         _startPanels();
-        uiAccountTimeline.setVisible( true );
-        uiAccountTimeline.setCurrentTimelinePanel( getTimelinePanel( PANEL_PUBLIC_TIMELINE ) );
-        uiAccountTimeline.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        uiAccountTimeline.setVisible(true);
+        uiAccountTimeline.setCurrentTimelinePanel(getTimelinePanel(PANEL_PUBLIC_TIMELINE));
+        uiAccountTimeline.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
@@ -83,13 +79,12 @@ public class JaytterUIAccountManager {
      * @param panelName
      * @return 
      */
-    public GenericTweetTimelinePanel getTimelinePanel( String panelName )
-    {
-        GenericTweetTimelinePanel panel = (GenericTweetTimelinePanel) uiTimelinesPanel.get( panelName );
-        
+    public GenericTweetTimelinePanel getTimelinePanel(String panelName) {
+        GenericTweetTimelinePanel panel = (GenericTweetTimelinePanel) uiTimelinesPanel.get(panelName);
+
         return panel;
     }
-    
+
     private void _startPanels() {
         uiTimelinesPanel.put(PANEL_MENTIONED, new UIMentioned());
         uiTimelinesPanel.put(PANEL_RETWEETS, new UIRetweet());
@@ -97,10 +92,12 @@ public class JaytterUIAccountManager {
         uiTimelinesPanel.put(PANEL_PUBLIC_TIMELINE, new UITimeline());
     }
 
-    public void changeActiveTimelinePanel( String panelName ) 
-    {
-        System.out.println( "change to panel" + panelName );
-        uiAccountTimeline.setCurrentTimelinePanel( getTimelinePanel( panelName ) );
+    public void changeActiveTimelinePanel(String panelName) {
+        GenericTweetTimelinePanel timelinePanel = getTimelinePanel(panelName);
+      
+        System.out.println("change to panel" + panelName);
+        uiAccountTimeline.setCurrentTimelinePanel(timelinePanel);
+        timelinePanel.update();
     }
 
     private static class JaytterUIAccountManagerHolder {
