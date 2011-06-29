@@ -24,8 +24,10 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 
 import java.util.List;
+import jaytter.ConsumerTokens;
 import twitter4j.ResponseList;
 import twitter4j.User;
+import twitter4j.auth.AccessToken;
 
 /**
  *
@@ -37,19 +39,46 @@ public class SearchUsers {
         
     String search = "EmanuelDomingos";
 
+       // Teste Pesquisa por Usuario
         Twitter twitter = new TwitterFactory().getInstance();
+        twitter.setOAuthConsumer(ConsumerTokens.KEY, ConsumerTokens.SECRET);
+        twitter.setOAuthAccessToken(account.getAccessToken());
         try {
-            QueryResult result = (QueryResult) twitter.searchUsers(search, 1);
-            List<Tweet> tweets = result.getTweets();
-            for (Tweet tweet : tweets) {
-                System.out.println("@" + tweet.getFromUser() + " - " + tweet.getText());
+            ResponseList<User> searchUsers = twitter.searchUsers(search, 1);
+            for(User user : searchUsers) {
+                System.out.println(user.getName()+ " - " + user.getScreenName());
             }
-            System.exit(0);
-        } catch (TwitterException te) {
-            te.printStackTrace();
-            System.out.println("Falha na busca por tweets: " + te.getMessage());
-            System.exit(-1);
+        } catch(TwitterException te) {
+            System.out.println(te.getMessage());
         }
+    
+    
+    
+    
+    
+//        Twitter twitter = new TwitterFactory().getInstance();
+//        try {
+//            QueryResult result = (QueryResult) twitter.searchUsers(search, 1);
+//            List<Tweet> tweets = result.getTweets();
+//            for (Tweet tweet : tweets) {
+//                System.out.println("@" + tweet.getFromUser() + " - " + tweet.getText());
+//            }
+//            System.exit(0);
+//        } catch (TwitterException te) {
+//            te.printStackTrace();
+//            System.out.println("Falha na busca por tweets: " + te.getMessage());
+//            System.exit(-1);
+//        }
     }
+
+//    private static class account {
+//
+//        private static AccessToken getAccessToken() {
+//            throw new UnsupportedOperationException("Not yet implemented");
+//        }
+//
+//        public account() {
+//        }
+//    }
 
 }
