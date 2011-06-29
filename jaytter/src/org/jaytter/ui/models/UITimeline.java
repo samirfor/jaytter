@@ -16,6 +16,8 @@
  */
 package org.jaytter.ui.models;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jaytter.ui.manager.account.JaytterUIAccountManager;
 import org.jaytter.ui.panels.impl.GenericTweetTimelinePanel;
 import twitter4j.Status;
@@ -31,7 +33,7 @@ public class UITimeline extends GenericTweetTimelinePanel {
     public UITimeline() {
         super("timeline");
 
-//        setupThread();
+        update();
     }
 
     private void setupThread() {
@@ -53,6 +55,11 @@ public class UITimeline extends GenericTweetTimelinePanel {
             public void run() {
                 System.out.println("[debug] Timeline Thread");
                 setupThread();
+                try {
+                    Thread.sleep( 1000 );
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(UITimeline.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         };
         

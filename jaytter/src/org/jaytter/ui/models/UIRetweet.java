@@ -17,8 +17,14 @@
 package org.jaytter.ui.models;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jaytter.model.tweet.Tweet;
+import org.jaytter.ui.manager.account.JaytterUIAccountManager;
 import org.jaytter.ui.panels.impl.GenericTweetTimelinePanel;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
 
 ;
 
@@ -32,16 +38,34 @@ public class UIRetweet extends GenericTweetTimelinePanel {
         super("RT");
     }
 
-    public void appendTweet(Tweet tweet) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    private void setupThread() {
+        //TODO Transformar isso em thread assincrona
+        try {
+            Twitter twitter = JaytterUIAccountManager.getInstance().getTwitterInstance();
+
+            for (Status status : twitter.getRetweetedByMe()) {
+                insertStatus(status);
+            }
+        } catch (TwitterException ex) {
+            System.out.println("erro!" + ex.getMessage());
+        }
     }
 
-    public void appendTweets(ArrayList<Tweet> tweets) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Runnable runnable = new Runnable() {
+
+            public void run() {
+                System.out.println("[debug] Timeline Thread");
+                setupThread();
+                try {
+                    Thread.sleep( 1000 );
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(UITimeline.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 }

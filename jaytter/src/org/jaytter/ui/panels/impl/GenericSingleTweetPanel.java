@@ -14,7 +14,6 @@
  */
 package org.jaytter.ui.panels.impl;
 
-import ui.core.containers.*;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +22,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import twitter4j.DirectMessage;
 import twitter4j.Status;
 
 /**
@@ -41,15 +41,15 @@ public class GenericSingleTweetPanel extends javax.swing.JPanel {
         System.out.println( status.getText() );
         message.setText("<html><p>" + status.getText() + "</p></html>");
     }
+    public GenericSingleTweetPanel(DirectMessage status) {
+        initComponents();
+        loadProfileImage(status.getRecipient().getProfileImageURL());
+        message.setText("<html><p>" + status.getText() + "</p></html>");
+    }
 
     private void loadProfileImage(URL source) {
-        Image image = null;
-        try {
-            image = ImageIO.read(source);
-        } catch (IOException ex) {
-            Logger.getLogger(GenericSingleTweetPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        avatar.setIcon(new ImageIcon(image));
+        
+        avatar.setText( "<html><img src=\"" + source.toString() +"\" width=\"70px\" height=\"70px\"/></html>");
     }
 
     public JLabel getAvatar() {

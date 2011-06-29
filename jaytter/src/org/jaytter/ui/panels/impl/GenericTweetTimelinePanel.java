@@ -23,6 +23,7 @@
 package org.jaytter.ui.panels.impl;
 
 import java.awt.Insets;
+import twitter4j.DirectMessage;
 import twitter4j.Status;
 
 /**
@@ -37,6 +38,7 @@ public abstract class GenericTweetTimelinePanel extends javax.swing.JPanel {
     /** Creates new form GenericTweetTimelinePanel */
     public GenericTweetTimelinePanel(String name) {
         initComponents();
+        update();
     }
 
     /** This method is called from within the constructor to
@@ -55,6 +57,22 @@ public abstract class GenericTweetTimelinePanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     protected void insertStatus(Status tweet) {
+        grid_current_y ++;
+        
+        GenericSingleTweetPanel p = new GenericSingleTweetPanel(tweet);
+
+        java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = grid_current_y;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 320;
+        gridBagConstraints.ipady = 30;
+        gridBagConstraints.weightx = 20.0;
+        
+        gridBagConstraints.insets = new Insets(3, 3, 3, 3);
+        add(p, gridBagConstraints);
+    }
+    protected void insertStatusDM(DirectMessage tweet) {
         grid_current_y ++;
         
         GenericSingleTweetPanel p = new GenericSingleTweetPanel(tweet);

@@ -60,6 +60,7 @@ public class AccountTimelineContainer extends javax.swing.JFrame {
         buttonDirectMessage = new javax.swing.JButton();
         tabsPanelScroll = new javax.swing.JScrollPane();
         tabsPanel = new javax.swing.JPanel();
+        painelTweet = new javax.swing.JPanel();
 
         jLabel1.setText("jLabel1");
 
@@ -123,6 +124,13 @@ public class AccountTimelineContainer extends javax.swing.JFrame {
 
         globalContainer.add(tabsPanelScroll, java.awt.BorderLayout.CENTER);
 
+        painelTweet.setPreferredSize(new java.awt.Dimension(300, 100));
+        painelTweet.setLayout(new java.awt.BorderLayout());
+
+        painelTweet.add( new AccountTweetForm(), java.awt.BorderLayout.CENTER );
+
+        globalContainer.add(painelTweet, java.awt.BorderLayout.NORTH);
+
         getContentPane().add(globalContainer, java.awt.BorderLayout.CENTER);
 
         getAccessibleContext().setAccessibleDescription("Jaytter Twitter Client");
@@ -166,6 +174,7 @@ public class AccountTimelineContainer extends javax.swing.JFrame {
     private javax.swing.JButton buttonRetweet;
     private javax.swing.JPanel globalContainer;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel painelTweet;
     private javax.swing.JPanel tabsContainer;
     private javax.swing.JPanel tabsPanel;
     private javax.swing.JScrollPane tabsPanelScroll;
