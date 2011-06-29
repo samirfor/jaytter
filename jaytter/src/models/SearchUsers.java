@@ -31,7 +31,7 @@ import twitter4j.User;
 public class SearchUsers {
 
     
-    String search = "EmanuelDomingos";
+    String search;
     //    public static void main (String args[]){
         public SearchUsers(String search ){
     
