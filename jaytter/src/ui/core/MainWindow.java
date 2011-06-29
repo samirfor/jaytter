@@ -28,10 +28,13 @@ import java.util.logging.Logger;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import jaytter.ConsumerTokens;
 import models.Account;
+import threads.SendTweet;
 import threads.Timeline;
 import twitter4j.Status;
 import twitter4j.TwitterException;
@@ -52,6 +55,7 @@ public class MainWindow extends javax.swing.JFrame {
     private Account account;
     private JFrame parentFrame;
     private String tweet;
+    private Timeline timeline;
 
     /** Creates new form MainWindow */
     public MainWindow(JFrame parentFrame, Account account) {
@@ -63,6 +67,14 @@ public class MainWindow extends javax.swing.JFrame {
         twitter.setOAuthAccessToken(account.getAccessToken());
         this.setTitle("@" + account.getUser().getScreenName() + " - " + account.getUser().getName());
         addTimeline();
+    }
+
+    public JLabel getStatusLabel() {
+        return statusLabel;
+    }
+
+    public JTextArea getTweetTextArea() {
+        return tweetTextArea;
     }
 
     /** This method is called from within the constructor to
@@ -272,9 +284,6 @@ public class MainWindow extends javax.swing.JFrame {
         int textSize = tweetTextArea.getText().length() + 1;
         if (textSize >= 140) {
             statusLabel.setText("<html><b>" + textSize + "/140</b></html>");
-//        } 
-//        else if (textSize == 1) {
-//            statusLabel.setText(textSize + "/140");
         } else {
             statusLabel.setText(textSize + "/140");
         }
@@ -323,21 +332,19 @@ public class MainWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Não há nada a twittar.", "Enviando tweet", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
-        try {
-            twitter.updateStatus(tweetTextArea.getText());
-        } catch (TwitterException ex) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Erro ao enviar tweet. Tente novamente.\n"+ex.getMessage(), "Enviando tweet", JOptionPane.ERROR_MESSAGE);
-        }
-        System.out.println("Successfully updated the status.");
-        statusLabel.setText("Tweet enviado com sucesso!");
-        tweetTextArea.setText("");
+
+        SendTweet sendTweet = new SendTweet(twitter, this, tweetTextArea.getText());
+        sendTweet.start();
+        statusLabel.setText("Enviando...");
     }//GEN-LAST:event_tweetButtonActionPerformed
 
     private void addTimeline() {
-        Timeline timeline = new Timeline(twitter, jPanel7);
+        timeline = new Timeline(twitter, jPanel7);
         timeline.start();
+    }
+
+    public void refreshTimeline() {
+        addTimeline();
     }
 
     private void addTweets() {
