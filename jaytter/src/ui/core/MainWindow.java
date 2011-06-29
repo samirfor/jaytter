@@ -15,29 +15,24 @@
  */
 package ui.core;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import jaytter.ConsumerTokens;
 import models.Account;
 import threads.SendTweet;
 import threads.Timeline;
-import twitter4j.Status;
-import twitter4j.TwitterException;
-import ui.core.containers.Tweet;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 
@@ -53,8 +48,8 @@ public class MainWindow extends javax.swing.JFrame {
     private Twitter twitter;
     private Account account;
     private JFrame parentFrame;
-    private String tweet;
     private Timeline timeline;
+    private long lastTweet;
 
     /** Creates new form MainWindow */
     public MainWindow(JFrame parentFrame, Account account) {
@@ -74,6 +69,18 @@ public class MainWindow extends javax.swing.JFrame {
 
     public JTextArea getTweetTextArea() {
         return tweetTextArea;
+    }
+
+    public long getLastTweet() {
+        return lastTweet;
+    }
+
+    public void setLastTweet(long lastTweet) {
+        this.lastTweet = lastTweet;
+    }
+
+    public JPanel getTimeLinePanel() {
+        return timeLinePanel;
     }
 
     /** This method is called from within the constructor to
@@ -101,7 +108,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel7 = new javax.swing.JPanel();
+        timeLinePanel = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         refreshTimelineMenuItem = new javax.swing.JMenuItem();
@@ -219,9 +226,9 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        jPanel7.setBackground(new java.awt.Color(0, 255, 255));
-        jPanel7.setLayout(new java.awt.GridBagLayout());
-        jScrollPane1.setViewportView(jPanel7);
+        timeLinePanel.setBackground(new java.awt.Color(0, 255, 255));
+        timeLinePanel.setLayout(new java.awt.GridBagLayout());
+        jScrollPane1.setViewportView(timeLinePanel);
 
         jPanel6.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -352,85 +359,12 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_refreshTimelineMenuItemActionPerformed
 
     private void addTimeline() {
-        timeline = new Timeline(twitter, jPanel7);
+        timeline = new Timeline(twitter, this);
         timeline.start();
     }
 
     public void refreshTimeline() {
         addTimeline();
-    }
-
-    private void addTweets() {
-        Tweet panelSingleTweet;
-        List<Status> statuses;
-
-        try {
-            statuses = twitter.getFriendsTimeline();
-
-            System.out.println("Showing friends timeline.");
-            for (Status status : statuses) {
-                int i = 0;
-                System.out.println(status.getUser().getName() + ":"
-                        + status.getText());
-
-                panelSingleTweet = new Tweet(status);
-                javax.swing.GroupLayout panelTweetLayout = new javax.swing.GroupLayout(panelSingleTweet);
-                panelSingleTweet.setLayout(panelTweetLayout);
-                panelTweetLayout.setAutoCreateGaps(true);
-                panelTweetLayout.setAutoCreateContainerGaps(true);
-
-                panelTweetLayout.setHorizontalGroup(panelTweetLayout.createSequentialGroup().addComponent(panelSingleTweet.getAvatar()).addGroup(panelTweetLayout.createParallelGroup(Alignment.LEADING).addComponent(panelSingleTweet.getMessage())));
-                panelTweetLayout.setVerticalGroup(panelTweetLayout.createSequentialGroup().addGroup(panelTweetLayout.createParallelGroup()).addComponent(panelSingleTweet.getAvatar()).addComponent(panelSingleTweet.getMessage()));
-
-
-//                panelTweetLayout.setHorizontalGroup(
-//                        panelTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 369, Short.MAX_VALUE));
-//                panelTweetLayout.setVerticalGroup(
-//                        panelTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 100, Short.MAX_VALUE));
-//
-//                java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
-//                gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-//                gridBagConstraints.gridx = 0;
-//                gridBagConstraints.gridy = i;
-//                gridBagConstraints.weightx = 20.0;
-
-                if (i % 2 == 0) {
-                    panelSingleTweet.setBackground(Color.getHSBColor(100, 200, 100));
-                } else {
-                    panelSingleTweet.setBackground(Color.getHSBColor(200, 100, 200));
-                }
-                jPanel7.add(panelSingleTweet);
-                jPanel7.repaint();
-                i++;
-            }
-        } catch (TwitterException ex) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex.getMessage());
-        }
-//        for (int i = 0; i < 40; i++) {
-//            panelTweetLocal = new Tweet();
-//            javax.swing.GroupLayout panelTweetLayout = new javax.swing.GroupLayout(panelTweetLocal);
-//            panelTweetLocal.setLayout(panelTweetLayout);
-//            panelTweetLayout.setHorizontalGroup(
-//                    panelTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 369, Short.MAX_VALUE));
-//            panelTweetLayout.setVerticalGroup(
-//                    panelTweetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 100, Short.MAX_VALUE));
-//
-//            java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
-//            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-//            gridBagConstraints.gridx = 0;
-//            gridBagConstraints.gridy = i;
-//            gridBagConstraints.weightx = 20.0;
-//
-//            if (i % 2 == 0) {
-//                panelTweetLocal.setBackground(Color.getHSBColor(100, 200, 100));
-//            } else {
-//                panelTweetLocal.setBackground(Color.getHSBColor(200, 100, 200));
-//            }
-//            jPanel7.add(panelTweetLocal, gridBagConstraints);
-//            jPanel7.repaint();
-//        }
-
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem copyMenuItem;
@@ -448,13 +382,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem logoffMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JMenuItem refreshTimelineMenuItem;
     private javax.swing.JLabel statusLabel;
+    private javax.swing.JPanel timeLinePanel;
     private javax.swing.JButton tweetButton;
     private javax.swing.JTextArea tweetTextArea;
     // End of variables declaration//GEN-END:variables

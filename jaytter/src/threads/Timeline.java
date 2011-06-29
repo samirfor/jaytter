@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -34,12 +34,12 @@ import ui.core.containers.Tweet;
 public class Timeline extends Thread {
 
     private final Twitter twitter;
-    private final JPanel panel;
+    private final MainWindow mainWindow;
     
-    public Timeline(Twitter twitter, JPanel panel) {
+    public Timeline(Twitter twitter, MainWindow mainWindow) {
         super();
         this.twitter = twitter;
-        this.panel = panel;
+        this.mainWindow = mainWindow;
     }
     
     @Override
@@ -53,8 +53,13 @@ public class Timeline extends Thread {
 
         try {
             statuses = twitter.getFriendsTimeline();
-
             System.out.println("Showing friends timeline.");
+            mainWindow.getStatusLabel().setText("Carregando linha do tempo...");
+            if (statuses.get(0).getId() == mainWindow.getLastTweet()) {
+                System.out.println("Timeline dont changed.");
+                return;
+            }
+            mainWindow.setLastTweet(statuses.get(0).getId());
             for (Status status : statuses) {
                 int i = 0;
                 System.out.println(status.getUser().getName() + ":"
@@ -94,13 +99,15 @@ public class Timeline extends Thread {
                 } else {
                     panelSingleTweet.setBackground(Color.getHSBColor(200, 100, 200));
                 }
-                panel.add(panelSingleTweet);
-                panel.repaint();
+                mainWindow.getTimeLinePanel().add(panelSingleTweet);
+                mainWindow.getTimeLinePanel().repaint();
                 i++;
             }
+            mainWindow.getStatusLabel().setText("Linha do tempo carregada.");
         } catch (TwitterException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(mainWindow, ex.getMessage(), "Carregando linha do tempo", JOptionPane.ERROR_MESSAGE);
         }
     }
     

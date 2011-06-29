@@ -16,18 +16,13 @@
  */
 package models;
 
-import twitter4j.Query;
-import twitter4j.QueryResult;
-import twitter4j.Tweet;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 
-import java.util.List;
 import jaytter.ConsumerTokens;
 import twitter4j.ResponseList;
 import twitter4j.User;
-import twitter4j.auth.AccessToken;
 
 /**
  *
@@ -42,7 +37,7 @@ public class SearchUsers {
        // Teste Pesquisa por Usuario
         Twitter twitter = new TwitterFactory().getInstance();
         twitter.setOAuthConsumer(ConsumerTokens.KEY, ConsumerTokens.SECRET);
-        twitter.setOAuthAccessToken(account.getAccessToken());
+//        twitter.setOAuthAccessToken(account.getAccessToken());
         try {
             ResponseList<User> searchUsers = twitter.searchUsers(search, 1);
             for(User user : searchUsers) {
