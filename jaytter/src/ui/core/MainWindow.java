@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -105,6 +104,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        refreshTimelineMenuItem = new javax.swing.JMenuItem();
         logoffMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         copyMenuItem = new javax.swing.JMenuItem();
@@ -233,6 +233,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenu1.setText("Twitter");
 
+        refreshTimelineMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        refreshTimelineMenuItem.setText("Atualizar linha do tempo");
+        refreshTimelineMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshTimelineMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(refreshTimelineMenuItem);
+
         logoffMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
         logoffMenuItem.setText("Logoff");
         logoffMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -338,6 +347,10 @@ public class MainWindow extends javax.swing.JFrame {
         statusLabel.setText("Enviando...");
     }//GEN-LAST:event_tweetButtonActionPerformed
 
+    private void refreshTimelineMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTimelineMenuItemActionPerformed
+        refreshTimeline();
+    }//GEN-LAST:event_refreshTimelineMenuItemActionPerformed
+
     private void addTimeline() {
         timeline = new Timeline(twitter, jPanel7);
         timeline.start();
@@ -440,6 +453,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem logoffMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
+    private javax.swing.JMenuItem refreshTimelineMenuItem;
     private javax.swing.JLabel statusLabel;
     private javax.swing.JButton tweetButton;
     private javax.swing.JTextArea tweetTextArea;

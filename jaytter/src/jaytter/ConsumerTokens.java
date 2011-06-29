@@ -17,8 +17,7 @@
 package jaytter;
 
 /**
- *
- * @author samir
+ * Classe responsavel por guardar as credenciais de acesso do aplicativo.
  */
 public class ConsumerTokens {
     public final static String KEY = "wHaPcyNhf4a7JBOf8I1ig";

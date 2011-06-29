@@ -18,16 +18,13 @@ package threads;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import ui.core.MainWindow;
 
 /**
- *
- * @author samirfor
+ * Envia um tweet em uma thread
  */
 public class SendTweet extends Thread {
 

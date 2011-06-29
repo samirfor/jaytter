@@ -13,19 +13,13 @@ import models.Account;
 import ui.core.containers.accounts.AccountList;
 
 /**
- *
- * @author joaoneto
+ * Lista as credenciais salvas em arquivos
  */
 public final class AccountsList extends javax.swing.JPanel {
 
     private JFrame parentFrame;
     private ArrayList<Account> storedAccounts;
 
-    /** Creates new form AccountsList */
-//    public AccountsList() {
-//        initComponents();
-//        addAccountsToList();
-//    }
     public AccountsList(JFrame parentFrame) {
         this.parentFrame = parentFrame;
         initComponents();

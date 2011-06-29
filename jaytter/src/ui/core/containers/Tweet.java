@@ -25,15 +25,7 @@ import javax.swing.JLabel;
 import twitter4j.Status;
 
 /**
- * TODO Esta classe deverá completar o esqueleto de Message, formando
- * um tweet completo.
- * 
- * Um tweet tem basicamente:
- * - autor (herda de Message)
- * - texto (herda de Message)
- * - timestamp (herda de Message)
- * - botão de RT, Quote (old RT), Favorite, Reply
- * @author samirfor
+ * Mostra um tweet
  */
 public class Tweet extends javax.swing.JPanel {
 

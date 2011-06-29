@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 joao-nb
+ *  Copyright (C) 2011
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -38,8 +38,7 @@ import ui.core.InitWindow;
 import util.OpenDefaultBrowser;
 
 /**
- *
- * @author joao-nb
+ * Responsável pela geração de credenciais
  */
 public class NewAccountDialog extends javax.swing.JDialog {
 

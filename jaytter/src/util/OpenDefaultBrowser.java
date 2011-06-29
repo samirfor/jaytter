@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 samirfor
+ * Copyright (C) 2011
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,8 +18,6 @@ package util;
 
 /**
  * This class is responsible for opening a URL in the default browser.
- * 
- * @author samirfor
  */
 public class OpenDefaultBrowser {
 

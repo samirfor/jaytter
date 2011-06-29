@@ -29,8 +29,7 @@ import ui.core.MainWindow;
 import ui.core.containers.Tweet;
 
 /**
- *
- * @author samirfor
+ * Mostra a linha do tempo usando thread para não bloquear a interface
  */
 public class Timeline extends Thread {
 

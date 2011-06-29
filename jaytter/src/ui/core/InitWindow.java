@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 joao-nb
+ *  Copyright (C) 2011
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,8 +26,7 @@ import ui.core.containers.AccountsList;
 import ui.newaccount.NewAccountDialog;
 
 /**
- *
- * @author joao-nb
+ * Janela onde o usuário vai criar uma credencial ou se autenticar.
  */
 public class InitWindow extends javax.swing.JFrame {
 

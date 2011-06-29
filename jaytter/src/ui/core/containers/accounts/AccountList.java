@@ -1,18 +1,9 @@
-/*
- * AccountList.java
- *
- * Created on 07/04/2011, 22:14:35
- */
 package ui.core.containers.accounts;
 
 import javax.swing.JFrame;
 import models.Account;
 import ui.core.MainWindow;
 
-/**
- *
- * @author joaoneto
- */
 public class AccountList extends javax.swing.JPanel {
     
     private JFrame parentFrame;

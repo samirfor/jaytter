@@ -28,8 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author joao-nb
+ * Grava as credenciais dos usuários em arquivo
  */
 public class Configuration {
 
