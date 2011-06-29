@@ -1,6 +1,4 @@
 /*
- * Copyright (C) 2011 samirfor
- *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -16,8 +14,6 @@
  */
 package models;
 
-import javax.swing.JPanel;
-
 /**
  * TODO Esta classe deverá criar um JPanel com um esqueleto dentro, 
  * ou seja, a mensagem, imagem do profile, timestamp, botões, etc.
@@ -27,7 +23,6 @@ import javax.swing.JPanel;
  * - autor
  * - timestamp
  * 
- * @author samirfor
  */
 public interface Message {
     

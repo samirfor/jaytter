@@ -1,6 +1,4 @@
 /*
- * Copyright (C) 2011 samirfor
- *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -16,8 +14,6 @@
  */
 package models;
 
-import models.Message;
-
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -32,9 +28,9 @@ import twitter4j.TwitterFactory;
  * - texto (herda de Message)
  * - timestamp (herda de Message)
  * 
- * @author samirfor
  */
 public class DirectMessage implements Message {
+
     public static void main(String[] args) {
         if (args.length < 2) {
             System.out.println("Usage: java twitter4j.examples.directmessage.SendDirectMessage [recipient screen name] [message]");
@@ -56,4 +52,3 @@ public class DirectMessage implements Message {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }
-

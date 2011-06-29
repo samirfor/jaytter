@@ -16,11 +16,20 @@
 package ui.core;
 
 import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import jaytter.ConsumerTokens;
 import models.Account;
 import threads.Timeline;
@@ -42,6 +51,7 @@ public class MainWindow extends javax.swing.JFrame {
     private Twitter twitter;
     private Account account;
     private JFrame parentFrame;
+    private String tweet;
 
     /** Creates new form MainWindow */
     public MainWindow(JFrame parentFrame, Account account) {
@@ -66,20 +76,27 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tweetTextArea = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        tweetButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        statusLabel = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel7 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        logoffMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        copyMenuItem = new javax.swing.JMenuItem();
+        pasteMenuItem = new javax.swing.JMenuItem();
 
         jLabel1.setText("jLabel1");
 
@@ -94,15 +111,49 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 102, 255));
 
+        tweetTextArea.setColumns(20);
+        tweetTextArea.setRows(5);
+        tweetTextArea.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tweetTextAreaFocusGained(evt);
+            }
+        });
+        tweetTextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tweetTextAreaKeyTyped(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tweetTextArea);
+
+        jLabel3.setText("O que está acontecendo?");
+
+        tweetButton.setText("Tweet");
+        tweetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tweetButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 437, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tweetButton)
+                .addContainerGap(177, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(tweetButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -128,21 +179,21 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel4.setPreferredSize(new java.awt.Dimension(60, 24));
         jPanel4.setRequestFocusEnabled(false);
 
-        jLabel2.setText("Status Bar");
+        statusLabel.setText("Status Bar");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(320, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addContainerGap(297, Short.MAX_VALUE)
+                .addComponent(statusLabel)
                 .addGap(55, 55, 55))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel2)
+                .addComponent(statusLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -169,9 +220,38 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("Twitter");
+
+        logoffMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
+        logoffMenuItem.setText("Logoff");
+        logoffMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoffMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(logoffMenuItem);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Editar");
+
+        copyMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        copyMenuItem.setText("Copiar");
+        copyMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu2.add(copyMenuItem);
+
+        pasteMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        pasteMenuItem.setText("Colar");
+        pasteMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pasteMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu2.add(pasteMenuItem);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -180,9 +260,73 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+        }
         InitWindow initWindow = new InitWindow();
         initWindow.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
+
+    private void tweetTextAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tweetTextAreaKeyTyped
+        int textSize = tweetTextArea.getText().length() + 1;
+        if (textSize >= 140) {
+            statusLabel.setText("<html><b>" + textSize + "/140</b></html>");
+//        } 
+//        else if (textSize == 1) {
+//            statusLabel.setText(textSize + "/140");
+        } else {
+            statusLabel.setText(textSize + "/140");
+        }
+    }//GEN-LAST:event_tweetTextAreaKeyTyped
+
+    private void copyMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyMenuItemActionPerformed
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Clipboard clipboard = toolkit.getSystemClipboard();
+        StringSelection strSel = new StringSelection(tweetTextArea.getText());
+        clipboard.setContents(strSel, null);
+    }//GEN-LAST:event_copyMenuItemActionPerformed
+
+    private void pasteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteMenuItemActionPerformed
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Clipboard clipboard = toolkit.getSystemClipboard();
+        try {
+            tweetTextArea.setText((String) clipboard.getData(DataFlavor.stringFlavor));
+        } catch (UnsupportedFlavorException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_pasteMenuItemActionPerformed
+
+    private void tweetTextAreaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tweetTextAreaFocusGained
+        statusLabel.setText(tweetTextArea.getText().length() + "/140");
+    }//GEN-LAST:event_tweetTextAreaFocusGained
+
+    private void logoffMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoffMenuItemActionPerformed
+        this.dispose();
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+        }
+        InitWindow initWindow = new InitWindow();
+        initWindow.setVisible(true);
+    }//GEN-LAST:event_logoffMenuItemActionPerformed
+
+    private void tweetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tweetButtonActionPerformed
+        if (tweetTextArea.getText().length() > 140) {
+            JOptionPane.showMessageDialog(this, "Seu tweet está muito grande. São permitidos no máximo 140 caracteres.", "Enviando tweet", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        try {
+            twitter.updateStatus(tweetTextArea.getText());
+        } catch (TwitterException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Erro ao enviar tweet. Tente novamente.\n"+ex.getMessage(), "Enviando tweet", JOptionPane.ERROR_MESSAGE);
+        }
+        System.out.println("Successfully updated the status.");
+    }//GEN-LAST:event_tweetButtonActionPerformed
 
     private void addTimeline() {
         Timeline timeline = new Timeline(twitter, jPanel7);
@@ -262,11 +406,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -278,5 +423,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenuItem logoffMenuItem;
+    private javax.swing.JMenuItem pasteMenuItem;
+    private javax.swing.JLabel statusLabel;
+    private javax.swing.JButton tweetButton;
+    private javax.swing.JTextArea tweetTextArea;
     // End of variables declaration//GEN-END:variables
 }

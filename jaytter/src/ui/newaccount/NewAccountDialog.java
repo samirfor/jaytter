@@ -26,6 +26,7 @@ import java.awt.Frame;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import jaytter.ConsumerTokens;
 import models.Account;
 import twitter4j.Twitter;
@@ -41,7 +42,7 @@ import util.OpenDefaultBrowser;
  * @author joao-nb
  */
 public class NewAccountDialog extends javax.swing.JDialog {
-    
+
     private Frame parentFrame;
 
     /** Creates new form NewAccountDialog */
@@ -129,8 +130,8 @@ public class NewAccountDialog extends javax.swing.JDialog {
                 OpenDefaultBrowser browser = new OpenDefaultBrowser(requestToken.getAuthorizationURL());
                 System.out.println(browser.getUrl());
                 browser.open();
-                JOptionPane.showConfirmDialog(this, "Clicando em OK abrirá uma página no seu navegador, por favor clique em Autorizar adiante", "Autorizar aplicativo", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                String pin = JOptionPane.showInputDialog("Cole aqui o código que foi gerado:");
+//                JOptionPane.showConfirmDialog(this, "Clicando em OK abrirá uma página no seu navegador, por favor clique em Autorizar adiante", "Autorizar aplicativo", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                String pin = JOptionPane.showInputDialog("Em breve abrirá uma página no seu navegador. Por favor, clique em Autorizar. Cole aqui o código que foi gerado:");
                 try {
                     if (pin.length() > 0) {
                         accessToken = twitter.getOAuthAccessToken(requestToken, pin);
@@ -151,11 +152,15 @@ public class NewAccountDialog extends javax.swing.JDialog {
             account.storeAccessToken();
             // TODO Inserir dados na tela dos logins
             parentFrame.dispose();
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (Exception e) {
+            }
             InitWindow initWindow = new InitWindow();
             initWindow.setVisible(true);
-            
+
             this.dispose(); // fecha a janela corrente
-            
+
         } catch (Exception ex) {
             Logger.getLogger(NewAccountDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
