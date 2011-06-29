@@ -314,8 +314,13 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_logoffMenuItemActionPerformed
 
     private void tweetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tweetButtonActionPerformed
-        if (tweetTextArea.getText().length() > 140) {
+        int textSize = tweetTextArea.getText().length();
+        if (textSize > 140) {
             JOptionPane.showMessageDialog(this, "Seu tweet está muito grande. São permitidos no máximo 140 caracteres.", "Enviando tweet", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        if (textSize == 0) {
+            JOptionPane.showMessageDialog(this, "Não há nada a twittar.", "Enviando tweet", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         
