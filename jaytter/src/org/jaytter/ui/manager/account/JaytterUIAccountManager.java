@@ -17,26 +17,33 @@
 package org.jaytter.ui.manager.account;
 
 import java.util.HashMap;
+import javax.swing.JFrame;
 import org.jaytter.model.user.TweetAccount;
+import org.jaytter.ui.account.AccountTimelineContainer;
 import org.jaytter.ui.models.UIDirectMessages;
 import org.jaytter.ui.models.UIMentioned;
+import org.jaytter.ui.models.UIRetweet;
 import org.jaytter.ui.models.UITimeline;
-import org.jaytter.ui.models.UITweetTimeline;
+import org.jaytter.ui.panels.impl.GenericTweetTimelinePanel;
 
 /**
  *
  * @author joao-nb
  */
 public class JaytterUIAccountManager {
-
+    //names of ui panel timeline
     public static final String PANEL_PUBLIC_TIMELINE = "timeline";
     public static final String PANEL_RETWEETS = "retweets";
     public static final String PANEL_DIRECTMESSAGES = "directmessage";
     public static final String PANEL_SEARCH = "search";
     public static final String PANEL_MENTIONED = "mentioned";
+
     private HashMap uiTimelinesPanel = new HashMap();
 
+    private AccountTimelineContainer uiAccountTimeline;
+    
     private JaytterUIAccountManager() {
+        uiAccountTimeline = new AccountTimelineContainer();
     }
 
     public static JaytterUIAccountManager getInstance() {
@@ -45,19 +52,34 @@ public class JaytterUIAccountManager {
 
     public void setupAccount(TweetAccount acc) {
         _startPanels();
+        uiAccountTimeline.setVisible( true );
+        uiAccountTimeline.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     }
 
-    public UITweetTimeline getTimelinePanel( String panelName )
+    /**
+     * Gets a UI Timeline object by name ( Use class const names )
+     * Use this instance to update Ui timeline
+     * @param panelName
+     * @return 
+     */
+    public GenericTweetTimelinePanel getTimelinePanel( String panelName )
     {
-        UITweetTimeline panel = (UITweetTimeline) uiTimelinesPanel.get( panelName );
+        GenericTweetTimelinePanel panel = (GenericTweetTimelinePanel) uiTimelinesPanel.get( panelName );
         
         return panel;
     }
+    
     private void _startPanels() {
         uiTimelinesPanel.put(PANEL_MENTIONED, new UIMentioned());
-        uiTimelinesPanel.put(PANEL_RETWEETS, new UIMentioned());
+        uiTimelinesPanel.put(PANEL_RETWEETS, new UIRetweet());
         uiTimelinesPanel.put(PANEL_DIRECTMESSAGES, new UIDirectMessages());
         uiTimelinesPanel.put(PANEL_PUBLIC_TIMELINE, new UITimeline());
+    }
+
+    public void changeActiveTimelinePanel( String panelName ) 
+    {
+        System.out.println( "change to panel" + panelName );
+        uiAccountTimeline.setCurrentTimelinePanel( getTimelinePanel( panelName ) );
     }
 
     private static class JaytterUIAccountManagerHolder {

@@ -2,6 +2,8 @@ package ui.core.containers.accounts;
 
 import javax.swing.JFrame;
 import models.Account;
+import org.jaytter.model.user.TweetAccount;
+import org.jaytter.ui.manager.account.JaytterUIAccountManager;
 import ui.core.MainWindow;
 
 public class AccountList extends javax.swing.JPanel {
@@ -45,28 +47,7 @@ public class AccountList extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        System.out.println("Usuário autenticado: " + this.account.getUser().getScreenName());
-        
-        MainWindow mainWindow = new MainWindow(parentFrame, account);
-        mainWindow.setVisible(true);
-        parentFrame.dispose();
-        
-        /*
-        // Teste Pesquisa por Usuario
-        Twitter twitter = new TwitterFactory().getInstance();
-        twitter.setOAuthConsumer(ConsumerTokens.KEY, ConsumerTokens.SECRET);
-        twitter.setOAuthAccessToken(account.getAccessToken());
-        try {
-            ResponseList<User> searchUsers = twitter.searchUsers("samir", 1);
-            for(User user : searchUsers) {
-                System.out.println(user.getName()+ " - " + user.getScreenName());
-            }
-        } catch(TwitterException te) {
-            System.out.println(te.getMessage());
-        }
-        // FIM Teste Pesquisa por Usuario
-        // Está funcionando!
-        */
+        JaytterUIAccountManager.getInstance().setupAccount( new TweetAccount() );
     }//GEN-LAST:event_buttonLoginActionPerformed
     private Account account;
     // Variables declaration - do not modify//GEN-BEGIN:variables

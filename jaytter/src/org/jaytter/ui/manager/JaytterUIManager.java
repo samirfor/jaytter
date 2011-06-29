@@ -16,6 +16,7 @@
  */
 package org.jaytter.ui.manager;
 
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import org.jaytter.model.user.TweetAccount;
 import org.jaytter.ui.main.InitWindow;
@@ -35,6 +36,13 @@ public class JaytterUIManager {
     private JaytterUIAccountManager accountManager;
 
     private JaytterUIManager() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(initWindow, "ERROR STARTING LOOK AND FEEL", "ERROR", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
+
+        }
         initWindow = new InitWindow();
         accountManager = JaytterUIAccountManager.getInstance();
     }

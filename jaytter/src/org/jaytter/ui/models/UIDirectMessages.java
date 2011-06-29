@@ -16,10 +16,27 @@
  */
 package org.jaytter.ui.models;
 
+import java.util.ArrayList;
+import org.jaytter.model.tweet.Tweet;
+import org.jaytter.ui.panels.impl.GenericTweetTimelinePanel;
+
 /**
  *
  * @author joao-nb
  */
-public class UIDirectMessages implements UITweetTimeline {
+public class UIDirectMessages extends GenericTweetTimelinePanel {
+
+    public UIDirectMessages()
+    {
+        super( "DM" );
+    }
+    
+    public void appendTweet(Tweet tweet) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void appendTweets(ArrayList<Tweet> tweets) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }
