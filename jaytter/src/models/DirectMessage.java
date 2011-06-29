@@ -18,7 +18,6 @@ package models;
 
 import models.Message;
 
-import twitter4j.DirectMessage;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -43,7 +42,7 @@ public class DirectMessage implements Message {
         }
         Twitter twitter = new TwitterFactory().getInstance();
         try {
-            DirectMessage message = twitter.sendDirectMessage(args[0], args[1]);
+            DirectMessage message = (DirectMessage) twitter.sendDirectMessage(args[0], args[1]);
             System.out.println("Mensagem direta enviada com sucesso para " + message.getRecipientScreenName());
             System.exit(0);
         } catch (TwitterException te) {
