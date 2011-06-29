@@ -23,6 +23,7 @@
 package org.jaytter.ui.panels.impl;
 
 import java.awt.Color;
+import java.awt.Insets;
 import javax.swing.JPanel;
 import org.jaytter.model.tweet.Tweet;
 import twitter4j.Status;
@@ -68,6 +69,8 @@ public class GenericTweetTimelinePanel extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 320;
         gridBagConstraints.ipady = 30;
         gridBagConstraints.weightx = 20.0;
+        
+        gridBagConstraints.insets = new Insets(3, 3, 3, 3);
         add(p, gridBagConstraints);
     }
 }
