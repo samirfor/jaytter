@@ -30,7 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import jaytter.ConsumerTokens;
-import models.Account;
+import org.jaytter.model.user.TwitterAccount;
 import threads.SendTweet;
 import threads.Timeline;
 import twitter4j.Twitter;
@@ -46,13 +46,13 @@ import twitter4j.TwitterFactory;
 public class MainWindow extends javax.swing.JFrame {
 
     private Twitter twitter;
-    private Account account;
+    private TwitterAccount account;
     private JFrame parentFrame;
     private Timeline timeline;
     private long lastTweet;
 
     /** Creates new form MainWindow */
-    public MainWindow(JFrame parentFrame, Account account) {
+    public MainWindow(JFrame parentFrame, TwitterAccount account) {
         initComponents();
         this.parentFrame = parentFrame;
         this.account = account;

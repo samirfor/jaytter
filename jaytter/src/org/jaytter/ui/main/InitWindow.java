@@ -23,8 +23,8 @@
 package org.jaytter.ui.main;
 
 import ui.core.*;
-import ui.core.containers.AccountsList;
-import ui.newaccount.NewAccountDialog;
+import org.jaytter.ui.panels.login.AccountsList;
+import org.jaytter.ui.panels.login.NewAccountDialog;
 
 /**
  *

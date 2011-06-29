@@ -13,7 +13,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc., 
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package models;
+package org.jaytter.model.user;
 
 import java.util.Date;
 import java.util.Properties;
@@ -28,7 +28,7 @@ import twitter4j.auth.AccessToken;
 
 /**
  * Project: JayTTer: A CrossPlatform Twitter Client
- * File name: Account.java
+ * File name: TwitterAccount.java
  * Description:  This is a model for store and view twitter local accounts
  *   
  * @author João Neto
@@ -36,7 +36,7 @@ import twitter4j.auth.AccessToken;
  *   
  * @see The GNU Public License (GPL) v3
  */
-public class Account {
+public class TwitterAccount {
 
     /** User details supplied by Twitter*/
     private User user;
@@ -49,7 +49,7 @@ public class Account {
     /** amount of login made ​​by user */
     private int loginTimes;
 
-    public Account(User user, String screenName, AccessToken accessToken, Date dateAdded, int loginTimes) {
+    public TwitterAccount(User user, String screenName, AccessToken accessToken, Date dateAdded, int loginTimes) {
         this.user = user;
         this.screenName = screenName;
         this.accessToken = accessToken;
@@ -57,23 +57,23 @@ public class Account {
         this.loginTimes = loginTimes;
     }
 
-    public Account(User user, AccessToken accessToken) {
+    public TwitterAccount(User user, AccessToken accessToken) {
         this.user = user;
         this.screenName = user.getName();
         this.accessToken = accessToken;
     }
 
-    public Account(String screenName, AccessToken accessToken) {
+    public TwitterAccount(String screenName, AccessToken accessToken) {
         this.screenName = screenName;
         this.accessToken = accessToken;
     }
 
-    public Account(AccessToken accessToken) {
+    public TwitterAccount(AccessToken accessToken) {
         this.accessToken = accessToken;
         fetchAttributesFromTwitter();
     }
 
-    public Account(String name) {
+    public TwitterAccount(String name) {
         Configuration configuration = new Configuration();
         Properties properties = configuration.getAccount(name);
         this.screenName = properties.getProperty("screen-name");
@@ -118,7 +118,7 @@ public class Account {
         try {
             this.user = twitter.verifyCredentials();
         } catch (TwitterException ex) {
-            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TwitterAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.screenName = user.getName();
     }

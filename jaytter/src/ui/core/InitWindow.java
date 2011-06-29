@@ -22,8 +22,8 @@
  */
 package ui.core;
 
-import ui.core.containers.AccountsList;
-import ui.newaccount.NewAccountDialog;
+import org.jaytter.ui.panels.login.AccountsList;
+import org.jaytter.ui.panels.login.NewAccountDialog;
 
 /**
  * Janela onde o usuário vai criar uma credencial ou se autenticar.

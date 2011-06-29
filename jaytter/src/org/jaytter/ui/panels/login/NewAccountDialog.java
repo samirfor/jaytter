@@ -20,7 +20,7 @@
  *
  * Created on 13/06/2011, 12:04:34
  */
-package ui.newaccount;
+package org.jaytter.ui.panels.login;
 
 import java.awt.Frame;
 import java.util.logging.Level;
@@ -28,14 +28,14 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import jaytter.ConsumerTokens;
-import models.Account;
+import org.jaytter.model.user.TwitterAccount;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import ui.core.InitWindow;
-import util.OpenDefaultBrowser;
+import org.jaytter.util.OpenDefaultBrowser;
 
 /**
  * Responsável pela geração de credenciais
@@ -95,14 +95,14 @@ public class NewAccountDialog extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(authButton)
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(authButton)
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -147,7 +147,7 @@ public class NewAccountDialog extends javax.swing.JDialog {
                 }
             }
 
-            Account account = new Account(twitter.verifyCredentials(), accessToken);
+            TwitterAccount account = new TwitterAccount(twitter.verifyCredentials(), accessToken);
             account.storeAccessToken();
             // TODO Inserir dados na tela dos logins
             parentFrame.dispose();

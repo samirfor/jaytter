@@ -18,13 +18,16 @@ package org.jaytter.ui.manager.account;
 
 import java.util.HashMap;
 import javax.swing.JFrame;
-import org.jaytter.model.user.TweetAccount;
+import jaytter.ConsumerTokens;
+import org.jaytter.model.user.TwitterAccount;
 import org.jaytter.ui.account.AccountTimelineContainer;
 import org.jaytter.ui.models.UIDirectMessages;
 import org.jaytter.ui.models.UIMentioned;
 import org.jaytter.ui.models.UIRetweet;
 import org.jaytter.ui.models.UITimeline;
 import org.jaytter.ui.panels.impl.GenericTweetTimelinePanel;
+import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
 
 /**
  *
@@ -42,6 +45,8 @@ public class JaytterUIAccountManager {
 
     private AccountTimelineContainer uiAccountTimeline;
     
+    private TwitterAccount          twitterUser;
+    
     private JaytterUIAccountManager() {
         uiAccountTimeline = new AccountTimelineContainer();
     }
@@ -50,7 +55,21 @@ public class JaytterUIAccountManager {
         return JaytterUIAccountManagerHolder.INSTANCE;
     }
 
-    public void setupAccount(TweetAccount acc) {
+    public TwitterAccount getUser()
+    {
+        return twitterUser;
+    }
+    
+    public Twitter getTwitterInstance()
+    {
+        Twitter twitter = new TwitterFactory().getInstance();
+        twitter.setOAuthConsumer(ConsumerTokens.KEY, ConsumerTokens.SECRET);
+        twitter.setOAuthAccessToken(getUser().getAccessToken());
+        
+        return twitter;
+    }
+    public void setupAccount(TwitterAccount acc) {
+        twitterUser = acc;
         _startPanels();
         uiAccountTimeline.setVisible( true );
         uiAccountTimeline.setCurrentTimelinePanel( getTimelinePanel( PANEL_PUBLIC_TIMELINE ) );

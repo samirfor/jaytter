@@ -1,17 +1,15 @@
-package ui.core.containers.accounts;
+package org.jaytter.ui.panels.login.accounts;
 
 import javax.swing.JFrame;
-import models.Account;
-import org.jaytter.model.user.TweetAccount;
+import org.jaytter.model.user.TwitterAccount;
 import org.jaytter.ui.manager.account.JaytterUIAccountManager;
-import ui.core.MainWindow;
 
-public class AccountList extends javax.swing.JPanel {
+public class SingleAccountLoginPanel extends javax.swing.JPanel {
     
     private JFrame parentFrame;
 
-    /** Creates new form AccountList */
-    public AccountList(JFrame parentFrame, Account account) {
+    /** Creates new form SingleAccountLoginPanel */
+    public SingleAccountLoginPanel(JFrame parentFrame, TwitterAccount account) {
         initComponents();
         this.parentFrame = parentFrame;
         this.account = account;
@@ -47,9 +45,9 @@ public class AccountList extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        JaytterUIAccountManager.getInstance().setupAccount( new TweetAccount() );
+        JaytterUIAccountManager.getInstance().setupAccount( account );
     }//GEN-LAST:event_buttonLoginActionPerformed
-    private Account account;
+    private TwitterAccount account;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel accountName;
     public javax.swing.JButton buttonLogin;

@@ -17,13 +17,13 @@ package jaytter.api;
 
 import java.util.ArrayList;
 import java.util.Properties;
-import models.Account;
+import org.jaytter.model.user.TwitterAccount;
 import storage.Configuration;
 import twitter4j.auth.AccessToken;
 
 /**
  * Project: JayTTer: A CrossPlatform Twitter Client
- * File name: Account.java
+ * File name: TwitterAccount.java
  * Description: Class for test
  *
  * @author João Neto
@@ -36,8 +36,8 @@ public class Accounts {
      * Return all accounts credentials stored on database
      * @return ArrayList<Account>
      */
-    public ArrayList<Account> getStoredAccounts() {
-        ArrayList<Account> v = new ArrayList();
+    public ArrayList<TwitterAccount> getStoredAccounts() {
+        ArrayList<TwitterAccount> v = new ArrayList();
         Configuration cnf = new Configuration();
 
         ArrayList<Properties> accounts = cnf.getStoredAccounts();
@@ -48,7 +48,7 @@ public class Accounts {
         }
 
         for (int i = 0; i < accounts.size(); i++) {
-            v.add(new Account(new AccessToken(accounts.get(i).getProperty("token"), accounts.get(i).getProperty("token-secret"))));
+            v.add(new TwitterAccount(new AccessToken(accounts.get(i).getProperty("token"), accounts.get(i).getProperty("token-secret"))));
         }
         return v;
     }

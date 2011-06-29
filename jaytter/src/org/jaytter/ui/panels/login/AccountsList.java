@@ -3,14 +3,14 @@
  *
  * Created on 07/04/2011, 22:06:31
  */
-package ui.core.containers;
+package org.jaytter.ui.panels.login;
 
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import jaytter.api.Accounts;
-import models.Account;
-import ui.core.containers.accounts.AccountList;
+import org.jaytter.model.user.TwitterAccount;
+import org.jaytter.ui.panels.login.accounts.SingleAccountLoginPanel;
 
 /**
  * Lista as credenciais salvas em arquivos
@@ -18,7 +18,7 @@ import ui.core.containers.accounts.AccountList;
 public final class AccountsList extends javax.swing.JPanel {
 
     private JFrame parentFrame;
-    private ArrayList<Account> storedAccounts;
+    private ArrayList<TwitterAccount> storedAccounts;
 
     public AccountsList(JFrame parentFrame) {
         this.parentFrame = parentFrame;
@@ -35,9 +35,9 @@ public final class AccountsList extends javax.swing.JPanel {
         }
     }
 
-    private void addAccountToPanel(Account a) {
+    private void addAccountToPanel(TwitterAccount a) {
         ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/jaytter/images/intents-assets/intents-assets/bird/bird_gray/bird_16_gray.png"));
-        this.accountsTag.addTab("", icon, new AccountList(parentFrame, a));
+        this.accountsTag.addTab("", icon, new SingleAccountLoginPanel(parentFrame, a));
     }
 
     /** This method is called from within the constructor to

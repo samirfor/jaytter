@@ -16,26 +16,33 @@
  */
 package org.jaytter.ui.models;
 
-import java.util.ArrayList;
-import org.jaytter.model.tweet.Tweet;
+import org.jaytter.ui.manager.account.JaytterUIAccountManager;
 import org.jaytter.ui.panels.impl.GenericTweetTimelinePanel;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
 
 /**
  *
  * @author joao-nb
  */
 public class UITimeline extends GenericTweetTimelinePanel {
-    public UITimeline()
-    {
-        super( "timeline" );
+
+    public UITimeline() {
+        super("timeline");
+
+        setupThread();
     }
 
-    public void appendTweet(Tweet tweet) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    private void setupThread() {
+        try {
+            Twitter twitter = JaytterUIAccountManager.getInstance().getTwitterInstance();
 
-    public void appendTweets(ArrayList<Tweet> tweets) {
-        throw new UnsupportedOperationException("Not supported yet.");
+            for (Status status : twitter.getFriendsTimeline()) {
+                insertStatus( status );
+            }
+        } catch (TwitterException ex) {
+            System.out.println("erro!" + ex.getMessage());
+        }
     }
-    
 }

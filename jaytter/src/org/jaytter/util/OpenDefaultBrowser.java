@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package util;
+package org.jaytter.util;
 
 /**
  * This class is responsible for opening a URL in the default browser.

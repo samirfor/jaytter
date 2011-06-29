@@ -18,7 +18,7 @@ package org.jaytter.ui.manager;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import org.jaytter.model.user.TweetAccount;
+import org.jaytter.model.user.TwitterAccount;
 import org.jaytter.ui.main.InitWindow;
 import org.jaytter.ui.manager.account.JaytterUIAccountManager;
 
@@ -77,7 +77,7 @@ public class JaytterUIManager {
         });
     }
 
-    public void startUIForAccount(TweetAccount acc) {
+    public void startUIForAccount(TwitterAccount acc) {
         accountManager.setupAccount(acc);
     }
 }

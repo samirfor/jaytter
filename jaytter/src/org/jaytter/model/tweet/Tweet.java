@@ -17,7 +17,7 @@
 package org.jaytter.model.tweet;
 
 import java.util.Date;
-import org.jaytter.model.user.TweetAccount;
+import org.jaytter.model.user.TwitterAccount;
 
 /**
  * This is a abstract class for Tweet instance on Jaytter
@@ -27,7 +27,7 @@ abstract public class Tweet {
     
     protected Date              date;
     
-    protected TweetAccount         from;
+    protected TwitterAccount    from;
     
     protected String            message;
     
@@ -41,11 +41,11 @@ abstract public class Tweet {
         this.date = date;
     }
 
-    public TweetAccount getFrom() {
+    public TwitterAccount getFrom() {
         return from;
     }
 
-    public void setFrom(TweetAccount from) {
+    public void setFrom(TwitterAccount from) {
         this.from = from;
     }
 

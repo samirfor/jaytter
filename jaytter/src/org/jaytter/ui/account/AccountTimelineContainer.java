@@ -15,13 +15,10 @@
  */
 package org.jaytter.ui.account;
 
-import java.awt.Color;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import models.Account;
+import org.jaytter.model.user.TwitterAccount;
 import org.jaytter.ui.manager.account.JaytterUIAccountManager;
-import org.jaytter.ui.panels.impl.GenericTweetTimelinePanel;
 import threads.Timeline;
 import twitter4j.Twitter;
 
@@ -35,7 +32,7 @@ import twitter4j.Twitter;
 public class AccountTimelineContainer extends javax.swing.JFrame {
 
     private Twitter twitter;
-    private Account account;
+    private TwitterAccount account;
     private JFrame parentFrame;
     private Timeline timeline;
     private long lastTweet;
