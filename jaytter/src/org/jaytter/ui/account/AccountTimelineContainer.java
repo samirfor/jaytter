@@ -61,8 +61,8 @@ public class AccountTimelineContainer extends javax.swing.JFrame {
         buttonRetweet = new javax.swing.JButton();
         buttonMentioned = new javax.swing.JButton();
         buttonDirectMessage = new javax.swing.JButton();
+        tabsPanelScroll = new javax.swing.JScrollPane();
         tabsPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -118,13 +118,13 @@ public class AccountTimelineContainer extends javax.swing.JFrame {
 
         globalContainer.add(tabsContainer, java.awt.BorderLayout.LINE_START);
 
-        tabsPanel.setBackground(new java.awt.Color(153, 153, 0));
+        tabsPanelScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        tabsPanelScroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
         tabsPanel.setLayout(new java.awt.BorderLayout());
+        tabsPanelScroll.setViewportView(tabsPanel);
 
-        jLabel2.setText("jLabel2");
-        tabsPanel.add(jLabel2, java.awt.BorderLayout.CENTER);
-
-        globalContainer.add(tabsPanel, java.awt.BorderLayout.CENTER);
+        globalContainer.add(tabsPanelScroll, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(globalContainer, java.awt.BorderLayout.CENTER);
 
@@ -136,11 +136,11 @@ public class AccountTimelineContainer extends javax.swing.JFrame {
 //        tabsPanel.removeAll(); //remove all antecessors
         System.out.println( "[debug] adding panel timelinepanel to the frame" );
         tabsPanel.removeAll();
-        tabsPanel.validate();
+        tabsPanel.validate(); //validates the remove
         
-        tabsPanel.add( timelinePanel,java.awt.BorderLayout.NORTH);
+        tabsPanel.add( timelinePanel,java.awt.BorderLayout.CENTER);
         tabsPanel.repaint();
-        tabsPanel.validate();
+        tabsPanel.validate(); //validates the repaint (Java sucks)
     }
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 
@@ -169,9 +169,9 @@ public class AccountTimelineContainer extends javax.swing.JFrame {
     private javax.swing.JButton buttonRetweet;
     private javax.swing.JPanel globalContainer;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel tabsContainer;
     private javax.swing.JPanel tabsPanel;
+    private javax.swing.JScrollPane tabsPanelScroll;
     // End of variables declaration//GEN-END:variables
 
     private void changePanel(String panelName ) {

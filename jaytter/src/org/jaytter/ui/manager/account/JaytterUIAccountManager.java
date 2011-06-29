@@ -53,6 +53,7 @@ public class JaytterUIAccountManager {
     public void setupAccount(TweetAccount acc) {
         _startPanels();
         uiAccountTimeline.setVisible( true );
+        uiAccountTimeline.setCurrentTimelinePanel( getTimelinePanel( PANEL_PUBLIC_TIMELINE ) );
         uiAccountTimeline.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     }
 

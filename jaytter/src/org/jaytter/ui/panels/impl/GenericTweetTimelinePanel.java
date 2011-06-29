@@ -22,6 +22,9 @@
  */
 package org.jaytter.ui.panels.impl;
 
+import java.awt.Color;
+import javax.swing.JPanel;
+
 /**
  *
  * @author joao-nb
@@ -29,10 +32,10 @@ package org.jaytter.ui.panels.impl;
 public class GenericTweetTimelinePanel extends javax.swing.JPanel {
 
     /** Creates new form GenericTweetTimelinePanel */
-    public GenericTweetTimelinePanel( String name ) {
+    public GenericTweetTimelinePanel(String name) {
         initComponents();
-        jLabel1.setText( name );
-        jLabel1.repaint();
+
+        _setupGrids();
     }
 
     /** This method is called from within the constructor to
@@ -43,16 +46,29 @@ public class GenericTweetTimelinePanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel1 = new javax.swing.JLabel();
-
-        setBackground(new java.awt.Color(153, 0, 153));
-        setLayout(new java.awt.BorderLayout());
-
-        jLabel1.setText("jLabel1");
-        add(jLabel1, java.awt.BorderLayout.CENTER);
+        setLayout(new java.awt.GridBagLayout());
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    private void _setupGrids() {
+        int height = getSize().height;
+
+        for (int i = 0; i < 30; i++) {
+            JPanel p = new JPanel();
+            p.setBackground( new Color( 100, 200, 100 ));
+            java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = i;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints.ipadx = 320;
+            gridBagConstraints.ipady = 30;
+            gridBagConstraints.weightx = 20.0;
+            add(p, gridBagConstraints);
+        }
+        
+        repaint();
+    }
 }
