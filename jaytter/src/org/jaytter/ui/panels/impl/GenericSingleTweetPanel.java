@@ -38,9 +38,10 @@ public class GenericSingleTweetPanel extends javax.swing.JPanel {
     public GenericSingleTweetPanel(Status status) {
         initComponents();
         loadProfileImage(status.getUser().getProfileImageURL());
-        System.out.println( status.getText() );
+        System.out.println(status.getUser().getName() + ": " + status.getText());
         message.setText("<html><p>" + status.getText() + "</p></html>");
     }
+
     public GenericSingleTweetPanel(DirectMessage status) {
         initComponents();
         loadProfileImage(status.getRecipient().getProfileImageURL());
@@ -48,8 +49,8 @@ public class GenericSingleTweetPanel extends javax.swing.JPanel {
     }
 
     private void loadProfileImage(URL source) {
-        
-        avatar.setText( "<html><img src=\"" + source.toString() +"\" width=\"70px\" height=\"70px\"/></html>");
+
+        avatar.setText("<html><img src=\"" + source.toString() + "\" width=\"70px\" height=\"70px\"/></html>");
     }
 
     public JLabel getAvatar() {
@@ -67,8 +68,6 @@ public class GenericSingleTweetPanel extends javax.swing.JPanel {
     public void setMessage(JLabel message) {
         this.message = message;
     }
-    
-    
 
     /** This method is called from within the constructor to
      * initialize the form.

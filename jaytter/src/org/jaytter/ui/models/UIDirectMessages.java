@@ -16,14 +16,10 @@
  */
 package org.jaytter.ui.models;
 
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.jaytter.model.tweet.Tweet;
 import org.jaytter.ui.manager.account.JaytterUIAccountManager;
 import org.jaytter.ui.panels.impl.GenericTweetTimelinePanel;
 import twitter4j.DirectMessage;
-import twitter4j.Status;
+import twitter4j.ResponseList;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
@@ -39,12 +35,17 @@ public class UIDirectMessages extends GenericTweetTimelinePanel {
         super("DM");
     }
 
-    private void setupThread() {
+    private void getData() {
         //TODO Transformar isso em thread assincrona
         try {
             Twitter twitter = JaytterUIAccountManager.getInstance().getTwitterInstance();
-
-            for (DirectMessage status : twitter.getDirectMessages() ) {
+            ResponseList<DirectMessage> directMessages = twitter.getDirectMessages();
+            if (last == directMessages.get(0).getId()) {
+                System.out.println("debug] Nothing new.");
+                return;
+            }
+            last = directMessages.get(0).getId();
+            for (DirectMessage status : directMessages) {
                 insertStatusDM(status);
             }
         } catch (TwitterException ex) {
@@ -57,15 +58,10 @@ public class UIDirectMessages extends GenericTweetTimelinePanel {
 
             public void run() {
                 System.out.println("[debug] Timeline Thread");
-                setupThread();
-                try {
-                    Thread.sleep( 1000 );
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(UITimeline.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                getData();
             }
         };
-        
+
         Thread thread = new Thread(runnable);
         thread.start();
     }

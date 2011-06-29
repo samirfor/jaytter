@@ -32,13 +32,14 @@ import twitter4j.Status;
  */
 public abstract class GenericTweetTimelinePanel extends javax.swing.JPanel {
 
-    protected int grid_current_x  = 0;
-    protected int grid_current_y  = 0;
+    protected int grid_current_x = 0;
+    protected int grid_current_y = 0;
+    protected int refreshTime = 120; // in seconds
+    protected long last;
 
     /** Creates new form GenericTweetTimelinePanel */
     public GenericTweetTimelinePanel(String name) {
         initComponents();
-        update();
     }
 
     /** This method is called from within the constructor to
@@ -57,8 +58,8 @@ public abstract class GenericTweetTimelinePanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     protected void insertStatus(Status tweet) {
-        grid_current_y ++;
-        
+        grid_current_y++;
+
         GenericSingleTweetPanel p = new GenericSingleTweetPanel(tweet);
 
         java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
@@ -68,13 +69,14 @@ public abstract class GenericTweetTimelinePanel extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 320;
         gridBagConstraints.ipady = 30;
         gridBagConstraints.weightx = 20.0;
-        
+
         gridBagConstraints.insets = new Insets(3, 3, 3, 3);
         add(p, gridBagConstraints);
     }
+
     protected void insertStatusDM(DirectMessage tweet) {
-        grid_current_y ++;
-        
+        grid_current_y++;
+
         GenericSingleTweetPanel p = new GenericSingleTweetPanel(tweet);
 
         java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
@@ -84,10 +86,18 @@ public abstract class GenericTweetTimelinePanel extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 320;
         gridBagConstraints.ipady = 30;
         gridBagConstraints.weightx = 20.0;
-        
+
         gridBagConstraints.insets = new Insets(3, 3, 3, 3);
         add(p, gridBagConstraints);
     }
-    
+
     public abstract void update();
+
+    public long getLast() {
+        return last;
+    }
+
+    public void setLast(long last) {
+        this.last = last;
+    }
 }

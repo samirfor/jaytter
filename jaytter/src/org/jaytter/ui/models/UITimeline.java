@@ -16,10 +16,9 @@
  */
 package org.jaytter.ui.models;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.jaytter.ui.manager.account.JaytterUIAccountManager;
 import org.jaytter.ui.panels.impl.GenericTweetTimelinePanel;
+import twitter4j.ResponseList;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -32,16 +31,20 @@ public class UITimeline extends GenericTweetTimelinePanel {
 
     public UITimeline() {
         super("timeline");
-
-        update();
     }
 
-    private void setupThread() {
-        //TODO Transformar isso em thread assincrona
+    private void getData() {
+
+
         try {
             Twitter twitter = JaytterUIAccountManager.getInstance().getTwitterInstance();
-
-            for (Status status : twitter.getFriendsTimeline()) {
+            ResponseList<Status> statuses = twitter.getFriendsTimeline();
+            if (last == statuses.get(0).getId()) {
+                System.out.println("[debug] Nothing new.");
+                return;
+            }
+            last = statuses.get(0).getId();
+            for (Status status : statuses) {
                 insertStatus(status);
             }
         } catch (TwitterException ex) {
@@ -49,20 +52,15 @@ public class UITimeline extends GenericTweetTimelinePanel {
         }
     }
 
-    public void update() {
+    public final void update() {
         Runnable runnable = new Runnable() {
 
             public void run() {
-                System.out.println("[debug] Timeline Thread");
-                setupThread();
-                try {
-                    Thread.sleep( 1000 );
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(UITimeline.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                System.out.println("[debug] UITimeline Thread");
+                getData();
             }
         };
-        
+
         Thread thread = new Thread(runnable);
         thread.start();
     }

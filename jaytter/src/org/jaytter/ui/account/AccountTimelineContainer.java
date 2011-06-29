@@ -15,12 +15,8 @@
  */
 package org.jaytter.ui.account;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import org.jaytter.model.user.TwitterAccount;
 import org.jaytter.ui.manager.account.JaytterUIAccountManager;
-import threads.Timeline;
-import twitter4j.Twitter;
 
 /**
  * Project: JayTTer: A CrossPlatform Twitter Client
@@ -30,12 +26,6 @@ import twitter4j.Twitter;
  * @see The GNU Public License (GPL) v3
  */
 public class AccountTimelineContainer extends javax.swing.JFrame {
-
-    private Twitter twitter;
-    private TwitterAccount account;
-    private JFrame parentFrame;
-    private Timeline timeline;
-    private long lastTweet;
 
     /** Creates new form MainWindow */
     public AccountTimelineContainer() {
@@ -167,6 +157,7 @@ public class AccountTimelineContainer extends javax.swing.JFrame {
     private void buttonDirectMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDirectMessageActionPerformed
         changePanel(JaytterUIAccountManager.PANEL_DIRECTMESSAGES);
     }//GEN-LAST:event_buttonDirectMessageActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonDirectMessage;
     private javax.swing.JButton buttonMentioned;

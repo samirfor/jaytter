@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 joao-nb
+ * Copyright (C) 2011
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,20 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-/*
- * AccountTweetForm.java
- *
- * Created on 29/06/2011, 03:12:25
- */
 package org.jaytter.ui.account;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.jaytter.ui.manager.account.JaytterUIAccountManager;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
 
-/**
- *
- * @author joao-nb
- */
 public class AccountTweetForm extends javax.swing.JPanel {
 
     /** Creates new form AccountTweetForm */
@@ -43,52 +39,118 @@ public class AccountTweetForm extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         userAvatar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         textTweet = new javax.swing.JTextArea();
         buttonTweet = new javax.swing.JButton();
-
-        setLayout(new java.awt.GridBagLayout());
+        statusLabel = new javax.swing.JLabel();
 
         userAvatar.setText("<html><img src=\"oi.png\" /></html>");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 52;
-        gridBagConstraints.ipady = 63;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 0, 0, 0);
-        add(userAvatar, gridBagConstraints);
 
         textTweet.setColumns(20);
         textTweet.setRows(5);
+        textTweet.setText("O que está acontecendo?");
+        textTweet.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textTweetFocusGained(evt);
+            }
+        });
+        textTweet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textTweetKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(textTweet);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 284;
-        gridBagConstraints.ipady = 56;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(12, 18, 0, 12);
-        add(jScrollPane1, gridBagConstraints);
-
         buttonTweet.setText("Twittar");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        gridBagConstraints.insets = new java.awt.Insets(6, 236, 12, 12);
-        add(buttonTweet, gridBagConstraints);
+        buttonTweet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTweetActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(userAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(statusLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                        .addComponent(buttonTweet))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(statusLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonTweet))))
+                    .addComponent(userAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonTweetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTweetActionPerformed
+        if (textTweet.getText().length() > 140) {
+            JOptionPane.showMessageDialog(this, "Seu tweet está muito grande. São permitidos no máximo 140 caracteres.", "Enviando tweet", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        if (textTweet.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Não há nada a twittar.", "Enviando tweet", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        Runnable runnable = new Runnable() {
+
+            public void run() {
+                Twitter twitter = JaytterUIAccountManager.getInstance().getTwitterInstance();
+                try {
+                    twitter.updateStatus(textTweet.getText());
+                } catch (TwitterException ex) {
+                    Logger.getLogger(AccountTweetForm.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(new JFrame(), "Erro ao enviar tweet. Tente novamente.\n" + ex.getMessage(), "Enviando tweet", JOptionPane.ERROR_MESSAGE);
+                }
+
+                System.out.println("Successfully updated the status.");
+                statusLabel.setText("<html><b>Tweet enviado com sucesso!</b></html>");
+                textTweet.setText("O que está acontecendo?");
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
+    }//GEN-LAST:event_buttonTweetActionPerformed
+private void textTweetFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textTweetFocusGained
+    textTweet.setText("");
+    statusLabel.setText("0/140");
+}//GEN-LAST:event_textTweetFocusGained
+
+private void textTweetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textTweetKeyPressed
+    int textSize = textTweet.getText().length()+1;
+    if (textSize >= 140) {
+        statusLabel.setText("<html><b>" + textSize + "/140</b></html>");
+    } else {
+        statusLabel.setText(textSize + "/140");
+    }
+}//GEN-LAST:event_textTweetKeyPressed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonTweet;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel statusLabel;
     private javax.swing.JTextArea textTweet;
     private javax.swing.JLabel userAvatar;
     // End of variables declaration//GEN-END:variables

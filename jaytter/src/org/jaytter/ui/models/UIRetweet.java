@@ -16,12 +16,9 @@
  */
 package org.jaytter.ui.models;
 
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.jaytter.model.tweet.Tweet;
 import org.jaytter.ui.manager.account.JaytterUIAccountManager;
 import org.jaytter.ui.panels.impl.GenericTweetTimelinePanel;
+import twitter4j.ResponseList;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -38,12 +35,17 @@ public class UIRetweet extends GenericTweetTimelinePanel {
         super("RT");
     }
 
-    private void setupThread() {
+    private void getData() {
         //TODO Transformar isso em thread assincrona
         try {
             Twitter twitter = JaytterUIAccountManager.getInstance().getTwitterInstance();
-
-            for (Status status : twitter.getRetweetedByMe()) {
+            ResponseList<Status> statuses = twitter.getRetweetedByMe();
+            if (last == statuses.get(0).getId()) {
+                System.out.println("debug] Nothing new.");
+                return;
+            }
+            last = statuses.get(0).getId();
+            for (Status status : statuses) {
                 insertStatus(status);
             }
         } catch (TwitterException ex) {
@@ -55,16 +57,11 @@ public class UIRetweet extends GenericTweetTimelinePanel {
         Runnable runnable = new Runnable() {
 
             public void run() {
-                System.out.println("[debug] Timeline Thread");
-                setupThread();
-                try {
-                    Thread.sleep( 1000 );
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(UITimeline.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                System.out.println("[debug] UIRetweet Thread");
+                getData();
             }
         };
-        
+
         Thread thread = new Thread(runnable);
         thread.start();
     }

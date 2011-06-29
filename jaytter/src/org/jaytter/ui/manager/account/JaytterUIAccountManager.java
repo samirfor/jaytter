@@ -17,6 +17,8 @@
 package org.jaytter.ui.manager.account;
 
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import jaytter.ConsumerTokens;
 import org.jaytter.model.user.TwitterAccount;
@@ -70,6 +72,7 @@ public class JaytterUIAccountManager {
         _startPanels();
         uiAccountTimeline.setVisible(true);
         uiAccountTimeline.setCurrentTimelinePanel(getTimelinePanel(PANEL_PUBLIC_TIMELINE));
+        changeActiveTimelinePanel(PANEL_PUBLIC_TIMELINE);
         uiAccountTimeline.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -93,11 +96,35 @@ public class JaytterUIAccountManager {
     }
 
     public void changeActiveTimelinePanel(String panelName) {
-        GenericTweetTimelinePanel timelinePanel = getTimelinePanel(panelName);
-      
+        final GenericTweetTimelinePanel timelinePanel = getTimelinePanel(panelName);
+
         System.out.println("change to panel" + panelName);
         uiAccountTimeline.setCurrentTimelinePanel(timelinePanel);
-        timelinePanel.update();
+
+        Runnable runnable = new Runnable() {
+            
+            public void run() {
+                while (true) {
+                    Runnable runnable = new Runnable() {
+
+                        public void run() {
+                            timelinePanel.update();
+                        }
+                    };
+
+                    Thread thread = new Thread(runnable);
+                    thread.start();
+                    try {
+                        Thread.sleep(120 * 1000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(UITimeline.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("Erro no sleep");
+                    }
+                }
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 
     private static class JaytterUIAccountManagerHolder {
