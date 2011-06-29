@@ -57,6 +57,7 @@ public class Timeline extends Thread {
             mainWindow.getStatusLabel().setText("Carregando linha do tempo...");
             if (statuses.get(0).getId() == mainWindow.getLastTweet()) {
                 System.out.println("Timeline dont changed.");
+                mainWindow.getStatusLabel().setText("Linha do tempo carregada.");
                 return;
             }
             mainWindow.setLastTweet(statuses.get(0).getId());

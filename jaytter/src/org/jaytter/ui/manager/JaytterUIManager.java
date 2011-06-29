@@ -16,6 +16,7 @@
  */
 package org.jaytter.ui.manager;
 
+import javax.swing.UIManager;
 import org.jaytter.model.user.TweetAccount;
 import org.jaytter.ui.main.InitWindow;
 import org.jaytter.ui.manager.account.JaytterUIAccountManager;
@@ -25,49 +26,50 @@ import org.jaytter.ui.manager.account.JaytterUIAccountManager;
  * @author joao-nb
  */
 public class JaytterUIManager {
-    
-    private InitWindow              initWindow;
-    
+
+    private InitWindow initWindow;
     /**
      * This class manage UI account methods ( Like addTweets to timeline, refresh timeline
      *  and manage threads )
      */
-    private JaytterUIAccountManager accountManager;  
-    
-    
+    private JaytterUIAccountManager accountManager;
+
     private JaytterUIManager() {
         initWindow = new InitWindow();
         accountManager = JaytterUIAccountManager.getInstance();
     }
-    
+
     public static JaytterUIManager getInstance() {
         return JaytterUIManagerHolder.INSTANCE;
     }
-    
+
     private static class JaytterUIManagerHolder {
 
         private static final JaytterUIManager INSTANCE = new JaytterUIManager();
     }
-    
+
     public InitWindow getInitWindow() {
         return initWindow;
     }
-    
+
     /**
      * Starts main window
-     */ 
-    public void startUIApplication()
-    {
+     */
+    public void startUIApplication() {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (Exception e) {
+                }
                 initWindow.updateAccountsList(); //refresh accounts list
                 initWindow.setVisible(true);
             }
         });
     }
-    
-    public void startUIForAccount( TweetAccount acc )
-    {
-        accountManager.setupAccount( acc );
+
+    public void startUIForAccount(TweetAccount acc) {
+        accountManager.setupAccount(acc);
     }
 }
