@@ -24,6 +24,7 @@ package org.jaytter.ui.panels.impl;
 
 import java.awt.Insets;
 import twitter4j.DirectMessage;
+import twitter4j.ResponseList;
 import twitter4j.Status;
 
 /**
@@ -35,7 +36,7 @@ public abstract class GenericTweetTimelinePanel extends javax.swing.JPanel {
     protected int grid_current_x = 0;
     protected int grid_current_y = 0;
     protected int refreshTime = 120; // in seconds
-    protected long last;
+    protected ResponseList<Status> cached;
 
     /** Creates new form GenericTweetTimelinePanel */
     public GenericTweetTimelinePanel(String name) {
@@ -92,12 +93,7 @@ public abstract class GenericTweetTimelinePanel extends javax.swing.JPanel {
     }
 
     public abstract void update();
-
-    public long getLast() {
-        return last;
-    }
-
-    public void setLast(long last) {
-        this.last = last;
-    }
+    
+    // TODO Fazer insertStatus() no topo do panel.
+    // TODO Fazer insertStatusDM() no topo do panel.
 }

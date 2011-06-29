@@ -39,13 +39,8 @@ public class UIDirectMessages extends GenericTweetTimelinePanel {
         //TODO Transformar isso em thread assincrona
         try {
             Twitter twitter = JaytterUIAccountManager.getInstance().getTwitterInstance();
-            ResponseList<DirectMessage> directMessages = twitter.getDirectMessages();
-            if (last == directMessages.get(0).getId()) {
-                System.out.println("debug] Nothing new.");
-                return;
-            }
-            last = directMessages.get(0).getId();
-            for (DirectMessage status : directMessages) {
+            ResponseList<DirectMessage> statuses = twitter.getDirectMessages();
+            for (DirectMessage status : statuses) {
                 insertStatusDM(status);
             }
         } catch (TwitterException ex) {
@@ -53,11 +48,11 @@ public class UIDirectMessages extends GenericTweetTimelinePanel {
         }
     }
 
-    public void update() {
+    public final void update() {
         Runnable runnable = new Runnable() {
 
             public void run() {
-                System.out.println("[debug] Timeline Thread");
+                System.out.println("[debug] UIDirectMessages Thread");
                 getData();
             }
         };

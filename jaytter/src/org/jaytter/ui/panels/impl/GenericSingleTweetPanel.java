@@ -14,13 +14,7 @@
  */
 package org.jaytter.ui.panels.impl;
 
-import java.awt.Image;
-import java.io.IOException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import twitter4j.DirectMessage;
 import twitter4j.Status;

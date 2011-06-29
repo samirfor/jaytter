@@ -40,14 +40,32 @@ public class UIRetweet extends GenericTweetTimelinePanel {
         try {
             Twitter twitter = JaytterUIAccountManager.getInstance().getTwitterInstance();
             ResponseList<Status> statuses = twitter.getRetweetedByMe();
-            if (last == statuses.get(0).getId()) {
-                System.out.println("debug] Nothing new.");
-                return;
-            }
-            last = statuses.get(0).getId();
-            for (Status status : statuses) {
-                insertStatus(status);
-            }
+//            if (cached == null || cached.isEmpty()) {
+//                System.out.println("empty or null");
+                for (Status status : statuses) {
+//                    cached.add(status);
+                    insertStatus(status);
+                }
+//            } else {
+//                System.out.println("cached");
+//                if (cached.get(0).getId() == statuses.get(0).getId()) {
+//                    System.out.println("[debug] Nothing new.");
+//                    return;
+//                }
+//                for (Status status : statuses) {
+//                    boolean cacheado = false;
+//                    for (Status s : cached) {
+//                        if (status.getId() == s.getId()) {
+//                            cacheado = true;
+//                            break;
+//                        }
+//                    }
+//                    if (!cacheado) {
+//                        cached.add(status);
+//                        insertStatus(status);
+//                    }
+//                }
+//            }
         } catch (TwitterException ex) {
             System.out.println("erro!" + ex.getMessage());
         }

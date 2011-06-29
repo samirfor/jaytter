@@ -157,7 +157,6 @@ public class AccountTimelineContainer extends javax.swing.JFrame {
     private void buttonDirectMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDirectMessageActionPerformed
         changePanel(JaytterUIAccountManager.PANEL_DIRECTMESSAGES);
     }//GEN-LAST:event_buttonDirectMessageActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonDirectMessage;
     private javax.swing.JButton buttonMentioned;
@@ -174,5 +173,9 @@ public class AccountTimelineContainer extends javax.swing.JFrame {
     private void changePanel(String panelName) {
         System.out.println("[debug] changing ui timeline panel to " + panelName);
         JaytterUIAccountManager.getInstance().changeActiveTimelinePanel(panelName);
+    }
+
+    public JPanel getPainelTweet() {
+        return painelTweet;
     }
 }

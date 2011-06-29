@@ -19,6 +19,7 @@ package org.jaytter.ui.account;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import org.jaytter.ui.manager.account.JaytterUIAccountManager;
 import twitter4j.Twitter;
@@ -140,7 +141,7 @@ private void textTweetFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:ev
 }//GEN-LAST:event_textTweetFocusGained
 
 private void textTweetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textTweetKeyPressed
-    int textSize = textTweet.getText().length()+1;
+    int textSize = textTweet.getText().length() + 1;
     if (textSize >= 140) {
         statusLabel.setText("<html><b>" + textSize + "/140</b></html>");
     } else {
@@ -154,4 +155,8 @@ private void textTweetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private javax.swing.JTextArea textTweet;
     private javax.swing.JLabel userAvatar;
     // End of variables declaration//GEN-END:variables
+
+    public JLabel getUserAvatar() {
+        return userAvatar;
+    }
 }

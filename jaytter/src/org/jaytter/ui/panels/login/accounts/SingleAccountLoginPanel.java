@@ -47,9 +47,9 @@ public class SingleAccountLoginPanel extends javax.swing.JPanel {
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        JaytterUIManager.getInstance().startUIForAccount( account );
+        JaytterUIManager.getInstance().startUIForAccount(account);
         parentFrame.dispose();
-        setCursor( Cursor.getDefaultCursor() );
+        setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_buttonLoginActionPerformed
     private TwitterAccount account;
     // Variables declaration - do not modify//GEN-BEGIN:variables

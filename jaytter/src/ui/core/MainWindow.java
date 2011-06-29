@@ -31,8 +31,8 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import jaytter.ConsumerTokens;
 import org.jaytter.model.user.TwitterAccount;
-import threads.SendTweet;
-import threads.Timeline;
+//import threads.SendTweet;
+//import threads.Timeline;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 
@@ -48,7 +48,7 @@ public class MainWindow extends javax.swing.JFrame {
     private Twitter twitter;
     private TwitterAccount account;
     private JFrame parentFrame;
-    private Timeline timeline;
+//    private Timeline timeline;
     private long lastTweet;
 
     /** Creates new form MainWindow */
@@ -349,8 +349,8 @@ public class MainWindow extends javax.swing.JFrame {
             return;
         }
 
-        SendTweet sendTweet = new SendTweet(twitter, this, tweetTextArea.getText());
-        sendTweet.start();
+//        SendTweet sendTweet = new SendTweet(twitter, this, tweetTextArea.getText());
+//        sendTweet.start();
         statusLabel.setText("Enviando...");
     }//GEN-LAST:event_tweetButtonActionPerformed
 
@@ -359,8 +359,8 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_refreshTimelineMenuItemActionPerformed
 
     private void addTimeline() {
-        timeline = new Timeline(twitter, this);
-        timeline.start();
+//        timeline = new Timeline(twitter, this);
+//        timeline.start();
     }
 
     public void refreshTimeline() {

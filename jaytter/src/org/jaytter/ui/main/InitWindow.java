@@ -22,7 +22,6 @@
  */
 package org.jaytter.ui.main;
 
-import ui.core.*;
 import org.jaytter.ui.panels.login.AccountsList;
 import org.jaytter.ui.panels.login.NewAccountDialog;
 
@@ -135,7 +134,6 @@ public class InitWindow extends javax.swing.JFrame {
         NewAccountDialog d = new NewAccountDialog(this, true);
         d.setVisible(true);
     }//GEN-LAST:event_botaoAdicionarContaActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JButton botaoAdicionarConta;
@@ -152,8 +150,9 @@ public class InitWindow extends javax.swing.JFrame {
     public void updateAccountsList() {
         AccountsList listaDeContas = new AccountsList(this);
         painelContas.add(listaDeContas);
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 painelContas.repaint();
             }

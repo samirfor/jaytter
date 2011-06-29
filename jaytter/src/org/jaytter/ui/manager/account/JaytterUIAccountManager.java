@@ -20,9 +20,11 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import jaytter.ConsumerTokens;
 import org.jaytter.model.user.TwitterAccount;
 import org.jaytter.ui.account.AccountTimelineContainer;
+import org.jaytter.ui.account.AccountTweetForm;
 import org.jaytter.ui.models.UIDirectMessages;
 import org.jaytter.ui.models.UIMentioned;
 import org.jaytter.ui.models.UIRetweet;
@@ -74,6 +76,8 @@ public class JaytterUIAccountManager {
         uiAccountTimeline.setCurrentTimelinePanel(getTimelinePanel(PANEL_PUBLIC_TIMELINE));
         changeActiveTimelinePanel(PANEL_PUBLIC_TIMELINE);
         uiAccountTimeline.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        AccountTweetForm accountTweetForm = (AccountTweetForm) uiAccountTimeline.getPainelTweet();
+//        accountTweetForm.getUserAvatar().setText("<html><img src=\"" + acc.getUser().getProfileImageURL() + "\" width=\"70px\" height=\"70px\"/></html>");
     }
 
     /**
@@ -102,7 +106,7 @@ public class JaytterUIAccountManager {
         uiAccountTimeline.setCurrentTimelinePanel(timelinePanel);
 
         Runnable runnable = new Runnable() {
-            
+
             public void run() {
                 while (true) {
                     Runnable runnable = new Runnable() {
@@ -125,6 +129,10 @@ public class JaytterUIAccountManager {
         };
         Thread thread = new Thread(runnable);
         thread.start();
+    }
+
+    public JPanel getTweetPanel() {
+        return uiAccountTimeline.getPainelTweet();
     }
 
     private static class JaytterUIAccountManagerHolder {
