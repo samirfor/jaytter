@@ -136,8 +136,10 @@ public class AccountTweetForm extends javax.swing.JPanel {
         thread.start();
     }//GEN-LAST:event_buttonTweetActionPerformed
 private void textTweetFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textTweetFocusGained
-    textTweet.setText("");
-    statusLabel.setText("0/140");
+    if ("O que está acontecendo?".equals(textTweet.getText())) {
+        textTweet.setText("");
+    }
+    statusLabel.setText(textTweet.getText().length() + "/140");
 }//GEN-LAST:event_textTweetFocusGained
 
 private void textTweetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textTweetKeyPressed
