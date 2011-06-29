@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 joao-nb
+ * Copyright (C) 2011 Jaytter Team
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ import org.jaytter.ui.manager.account.JaytterUIAccountManager;
 
 /**
  *
- * @author joao-nb
+ * @author Jaytter Team
  */
 public class JaytterUIManager {
 

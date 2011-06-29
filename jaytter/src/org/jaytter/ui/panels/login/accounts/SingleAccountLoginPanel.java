@@ -4,7 +4,6 @@ import java.awt.Cursor;
 import javax.swing.JFrame;
 import org.jaytter.model.user.TwitterAccount;
 import org.jaytter.ui.manager.JaytterUIManager;
-import org.jaytter.ui.manager.account.JaytterUIAccountManager;
 
 public class SingleAccountLoginPanel extends javax.swing.JPanel {
     
