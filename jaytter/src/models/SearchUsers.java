@@ -30,9 +30,12 @@ import twitter4j.User;
  */
 public class SearchUsers {
 
-        public static void main (String args[]){
-        
+    
     String search = "EmanuelDomingos";
+    //    public static void main (String args[]){
+        public SearchUsers(String search ){
+    
+            this.search = search;
 
        // Teste Pesquisa por Usuario
         Twitter twitter = new TwitterFactory().getInstance();
@@ -46,34 +49,6 @@ public class SearchUsers {
         } catch(TwitterException te) {
             System.out.println(te.getMessage());
         }
-    
-    
-    
-    
-    
-//        Twitter twitter = new TwitterFactory().getInstance();
-//        try {
-//            QueryResult result = (QueryResult) twitter.searchUsers(search, 1);
-//            List<Tweet> tweets = result.getTweets();
-//            for (Tweet tweet : tweets) {
-//                System.out.println("@" + tweet.getFromUser() + " - " + tweet.getText());
-//            }
-//            System.exit(0);
-//        } catch (TwitterException te) {
-//            te.printStackTrace();
-//            System.out.println("Falha na busca por tweets: " + te.getMessage());
-//            System.exit(-1);
-//        }
-    }
-
-//    private static class account {
-//
-//        private static AccessToken getAccessToken() {
-//            throw new UnsupportedOperationException("Not yet implemented");
-//        }
-//
-//        public account() {
-//        }
-//    }
-
+       
+        }
 }
