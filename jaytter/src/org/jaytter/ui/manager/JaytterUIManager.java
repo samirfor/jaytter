@@ -79,5 +79,6 @@ public class JaytterUIManager {
 
     public void startUIForAccount(TwitterAccount acc) {
         accountManager.setupAccount(acc);
+        initWindow.hide();
     }
 }

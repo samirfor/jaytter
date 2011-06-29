@@ -35,6 +35,7 @@ public class UITimeline extends GenericTweetTimelinePanel {
     }
 
     private void setupThread() {
+        //TODO Transformar isso em thread assincrona
         try {
             Twitter twitter = JaytterUIAccountManager.getInstance().getTwitterInstance();
 

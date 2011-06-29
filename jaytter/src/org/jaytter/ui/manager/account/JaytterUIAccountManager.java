@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import jaytter.ConsumerTokens;
 import org.jaytter.model.user.TwitterAccount;
 import org.jaytter.ui.account.AccountTimelineContainer;
+import org.jaytter.ui.manager.JaytterUIManager;
 import org.jaytter.ui.models.UIDirectMessages;
 import org.jaytter.ui.models.UIMentioned;
 import org.jaytter.ui.models.UIRetweet;

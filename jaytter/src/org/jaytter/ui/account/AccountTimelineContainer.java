@@ -63,8 +63,8 @@ public class AccountTimelineContainer extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setLocationByPlatform(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Jaytter - Twitter Client");
         setMinimumSize(new java.awt.Dimension(500, 600));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -125,7 +125,10 @@ public class AccountTimelineContainer extends javax.swing.JFrame {
 
         getContentPane().add(globalContainer, java.awt.BorderLayout.CENTER);
 
-        pack();
+        getAccessibleContext().setAccessibleDescription("Jaytter Twitter Client");
+
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-435)/2, (screenSize.height-619)/2, 435, 619);
     }// </editor-fold>//GEN-END:initComponents
 
     public void setCurrentTimelinePanel( JPanel timelinePanel )

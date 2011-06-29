@@ -1,7 +1,9 @@
 package org.jaytter.ui.panels.login.accounts;
 
+import java.awt.Cursor;
 import javax.swing.JFrame;
 import org.jaytter.model.user.TwitterAccount;
+import org.jaytter.ui.manager.JaytterUIManager;
 import org.jaytter.ui.manager.account.JaytterUIAccountManager;
 
 public class SingleAccountLoginPanel extends javax.swing.JPanel {
@@ -45,7 +47,10 @@ public class SingleAccountLoginPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        JaytterUIAccountManager.getInstance().setupAccount( account );
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        JaytterUIManager.getInstance().startUIForAccount( account );
+        parentFrame.dispose();
+        setCursor( Cursor.getDefaultCursor() );
     }//GEN-LAST:event_buttonLoginActionPerformed
     private TwitterAccount account;
     // Variables declaration - do not modify//GEN-BEGIN:variables

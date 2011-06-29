@@ -22,10 +22,7 @@
  */
 package org.jaytter.ui.panels.impl;
 
-import java.awt.Color;
 import java.awt.Insets;
-import javax.swing.JPanel;
-import org.jaytter.model.tweet.Tweet;
 import twitter4j.Status;
 
 /**
